@@ -38,7 +38,7 @@ namespace MVCTechnoWorld.Controllers
             if (ModelState.IsValid)
             {
                 //string currentUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-                var created = _productService.Create(bindingModel.Type, bindingModel.Brand, bindingModel.Color, bindingModel.Price, bindingModel.Description, bindingModel.Picture);
+                var created = _productService.Create(bindingModel.Model, bindingModel.Category, bindingModel.Brand, bindingModel.Description, bindingModel.Picture, bindingModel.Price, bindingModel.Quantity, bindingModel.Discount);
                 if (created)
                 {
                     return this.RedirectToAction("Success");
@@ -57,12 +57,15 @@ namespace MVCTechnoWorld.Controllers
             ProductCreateViewModel product = new ProductCreateViewModel()
             {
                 Id = item.Id,
-                Type = item.Type,
+                Model = item.Model,
+                Category = item.Category,
                 Brand = item.Brand,
-                Color = item.Color,
-                Price = item.Price,
                 Description = item.Description,
-                Picture = item.Picture
+                Picture = item.Picture,
+                Price = item.Price,
+                Quantity = item.Quantity,
+                Discount = item.Discount
+
             };
             return View(product);
         }
@@ -72,7 +75,7 @@ namespace MVCTechnoWorld.Controllers
         {
             if (ModelState.IsValid)
             {
-                var updated = _productService.UpdateProduct(id, bindingModel.Type, bindingModel.Brand, bindingModel.Color, bindingModel.Price, bindingModel.Description, bindingModel.Picture);
+                var updated = _productService.UpdateProduct(id, bindingModel.Model, bindingModel.Category, bindingModel.Brand, bindingModel.Description, bindingModel.Picture, bindingModel.Price, bindingModel.Quantity, bindingModel.Discount);
                 if (updated)
                 {
                     return this.RedirectToAction("All");
@@ -94,12 +97,14 @@ namespace MVCTechnoWorld.Controllers
             ProductCreateViewModel product = new ProductCreateViewModel()
             {
                 Id = item.Id,
-                Type = item.Type,
+                Model = item.Model,
+                Category = item.Category,
                 Brand = item.Brand,
-                Color = item.Color,
-                Price = item.Price,
                 Description = item.Description,
-                Picture = item.Picture
+                Picture = item.Picture,
+                Price = item.Price,
+                Quantity = item.Quantity,
+                Discount = item.Discount
             };
             return View(product);
         }
@@ -132,12 +137,14 @@ namespace MVCTechnoWorld.Controllers
                 .Select(productFromDb => new ProductAllViewModel
                 {
                     Id = productFromDb.Id,
-                    Type = productFromDb.Type,
+                    Model = productFromDb.Model,
+                    Category = productFromDb.Category,
                     Brand = productFromDb.Brand,
-                    Color = productFromDb.Color,
-                    Price = productFromDb.Price,
                     Description = productFromDb.Description,
-                    Picture = productFromDb.Picture
+                    Picture = productFromDb.Picture,
+                    Price = productFromDb.Price,
+                    Quantity = productFromDb.Quantity,
+                    Discount = productFromDb.Discount
                     //FullName = productFromDb.Owner.FirstName + " " + productFromDb.Owner.LastName
                 }).ToList();
 

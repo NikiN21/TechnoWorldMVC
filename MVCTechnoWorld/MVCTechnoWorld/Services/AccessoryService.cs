@@ -16,16 +16,17 @@ namespace MVCTechnoWorld.Services
         {
             _context = context;
         }
-        public bool Create(string type, string brand, string color, decimal price, string description, string picture) // string userId
+        public bool Create(string type, string category, string brand, string description, string picture, decimal price, int quantity, decimal discount) // string userId
         {
             Accessory item = new Accessory
             {
                 Type = type,
+                Category = category,
                 Brand = brand,
-                Color = color,
-                Price = price,
                 Description = description,
-                Picture = picture
+                Picture = picture,
+                Price = price,
+                Quantity = quantity
             };
 
             _context.Accessories.Add(item);
@@ -58,7 +59,7 @@ namespace MVCTechnoWorld.Services
             return _context.SaveChanges() != 0;
         }
 
-        public bool UpdateAccessory(int accessoryId, string type, string brand, string color, decimal price, string description, string picture)
+        public bool UpdateAccessory(int accessoryId, string type, string category, string brand, string description, string picture, decimal price, int quantity, decimal discount)
         {
             {
                 var accessory = GetAccessoryById(accessoryId);
@@ -67,11 +68,12 @@ namespace MVCTechnoWorld.Services
                     return false;
                 }
                 accessory.Type = type;
+                accessory.Category = category;
                 accessory.Brand = brand;
-                accessory.Color = color;
-                accessory.Price = price;
                 accessory.Description = description;
                 accessory.Picture = picture;
+                accessory.Price = price;
+                accessory.Quantity = quantity;
                 _context.Update(accessory);
                 return _context.SaveChanges() != 0;
             }

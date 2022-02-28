@@ -6,8 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MVCTechnoWorld.Data;
-using MVCTechnoWorld.Domain;
-using MVCTechnoWorld.Models;
 using Microsoft.AspNetCore.Authorization;
 using MVCTechnoWorld.Abstractions;
 using Microsoft.AspNetCore.Http;
@@ -37,7 +35,7 @@ namespace MVCTechnoWorld.Controllers
             if (ModelState.IsValid)
             {
                 //string currentUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-                var created = _accessoryService.Create(bindingModel.Type, bindingModel.Brand, bindingModel.Color, bindingModel.Price, bindingModel.Description, bindingModel.Picture);
+                var created = _accessoryService.Create(bindingModel.Type, bindingModel.Category, bindingModel.Brand, bindingModel.Description, bindingModel.Picture, bindingModel.Price, bindingModel.Quantity, bindingModel.Discount);
                 if (created)
                 {
                     return this.RedirectToAction("Success");
@@ -57,11 +55,13 @@ namespace MVCTechnoWorld.Controllers
             {
                 Id = item.Id,
                 Type = item.Type,
+                Category = item.Category,
                 Brand = item.Brand,
-                Color = item.Color,
-                Price = item.Price,
                 Description = item.Description,
-                Picture = item.Picture
+                Picture = item.Picture,
+                Price = item.Price,
+                Quantity = item.Quantity,
+                Discount = item.Discount
             };
             return View(accessory);
         }
@@ -71,7 +71,7 @@ namespace MVCTechnoWorld.Controllers
         {
             if (ModelState.IsValid)
             {
-                var updated = _accessoryService.UpdateAccessory(id, bindingModel.Type, bindingModel.Brand, bindingModel.Color, bindingModel.Price, bindingModel.Description, bindingModel.Picture);
+                var updated = _accessoryService.UpdateAccessory(id, bindingModel.Type, bindingModel.Category, bindingModel.Brand, bindingModel.Description, bindingModel.Picture, bindingModel.Price, bindingModel.Quantity, bindingModel.Discount);
                 if (updated)
                 {
                     return this.RedirectToAction("All");
@@ -94,11 +94,13 @@ namespace MVCTechnoWorld.Controllers
             {
                 Id = item.Id,
                 Type = item.Type,
+                Category = item.Category,
                 Brand = item.Brand,
-                Color = item.Color,
-                Price = item.Price,
                 Description = item.Description,
-                Picture = item.Picture
+                Picture = item.Picture,
+                Price = item.Price,
+                Quantity = item.Quantity,
+                Discount = item.Discount
             };
             return View(accessory);
         }
@@ -132,11 +134,14 @@ namespace MVCTechnoWorld.Controllers
                 {
                     Id = accessoriesFromDb.Id,
                     Type = accessoriesFromDb.Type,
+                    Category = accessoriesFromDb.Category,
                     Brand = accessoriesFromDb.Brand,
-                    Color = accessoriesFromDb.Color,
-                    Price = accessoriesFromDb.Price,
                     Description = accessoriesFromDb.Description,
-                    Picture = accessoriesFromDb.Picture
+                    Picture = accessoriesFromDb.Picture,
+                    Price = accessoriesFromDb.Price,
+                    Quantity = accessoriesFromDb.Quantity,
+                    Discount = accessoriesFromDb.Discount
+                    
                     //FullName = accessoriesFromDb.Owner.FirstName + " " + accessoriesFromDb.Owner.LastName
                 }).ToList();
 

@@ -13,19 +13,25 @@ namespace MVCTechnoWorld.Models
         [Display(Name = "Type")]
         public string Type { get; set; }
 
+        [Display(Name = "Category")]
+        public string Category { get; set; }
+
         [Display(Name = "Brand")]
         public string Brand { get; set; }
-
-        [Display(Name = "Color")]
-        public string Color { get; set; }
-
-        [Display(Name = "Price")]
-        public decimal Price { get; set; }
 
         [Display(Name = "Description")]
         public string Description { get; set; }
 
         [Display(Name = "Picture")]
         public string Picture { get; set; }
+
+        [Display(Name = "Price")]
+        public decimal Price { get; set; }
+
+        [Display(Name = "Quantity")]
+        public int Quantity { get; set; }
+
+        [Display(Name = "Discount")]
+        public decimal Discount { get; set; }
     }
 }

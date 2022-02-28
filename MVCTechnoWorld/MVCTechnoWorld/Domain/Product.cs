@@ -13,20 +13,24 @@ namespace MVCTechnoWorld.Domain
 
         public int Id { get; set; }
         [Required]
-        [MaxLength(20)]
-        public string Type { get; set; }
+        
+        public string Model { get; set; }
         [Required]
-        [MaxLength(20)]
+        
+        public string Category { get; set; }
+        [Required]
         public string Brand { get; set; }
         [Required]
-        public string Color { get; set; }
+        public string Description { get; set; }
+        public string Picture { get; set; }
         [Required]
         [Range(50, 4000)]
         public decimal Price { get; set; }
-        [Required]
-        public string Description { get; set; }
+        public int Quantity { get; set; }
+        public decimal Discount { get; set; }
 
-        public string Picture { get; set; }
+
+
 
 
     }

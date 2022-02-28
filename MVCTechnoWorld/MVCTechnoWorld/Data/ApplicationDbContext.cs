@@ -8,7 +8,7 @@ using MVCTechnoWorld.Models;
 
 namespace MVCTechnoWorld.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext <ProductsUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

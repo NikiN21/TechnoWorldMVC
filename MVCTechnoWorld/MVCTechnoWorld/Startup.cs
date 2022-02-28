@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MVCTechnoWorld.Abstractions;
 using MVCTechnoWorld.Data;
+using MVCTechnoWorld.Domain;
+using MVCTechnoWorld.Infrastructure;
 using MVCTechnoWorld.Services;
 using System;
 using System.Collections.Generic;
@@ -19,68 +21,146 @@ namespace MVCTechnoWorld
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+        //        public Startup(IConfiguration configuration)
+        //        {
+        //            Configuration = configuration;
+        //        }
 
-        public IConfiguration Configuration { get; }
+        //        public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDatabaseDeveloperPageExceptionFilter();
+        //        // This method gets called by the runtime. Use this method to add services to the container.
+        //        public void ConfigureServices(IServiceCollection services)
+        //        {
+        //            services.AddDbContext<ApplicationDbContext>(options =>
+        //                options.UseSqlServer(
+        //                    Configuration.GetConnectionString("DefaultConnection")));
+        //            services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddControllersWithViews();
-            services.AddTransient<IAccessoryService, AccessoryService>();
-            services.AddTransient<IProductService, ProductService>();
+        //            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+        //              .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddRazorPages();
-            services.Configure<IdentityOptions>(options =>
+        //            services.AddTransient<IAccessoryService, AccessoryService>();
+        //            services.AddTransient<IProductService, ProductService>();
+
+        //            services.AddIdentity<ProductsUser, IdentityRole>()
+        //               .AddEntityFrameworkStores<ApplicationDbContext>()
+        //                .AddDefaultTokenProviders();
+
+        //            services.AddControllersWithViews();
+        //            services.AddRazorPages();
+
+        //            services.Configure<IdentityOptions>(options =>
+        //            {
+        //                options.Password.RequireDigit = false;
+        //                options.Password.RequiredLength = 5;
+        //                options.Password.RequireLowercase = false;
+        //                options.Password.RequireNonAlphanumeric = false;
+        //                options.Password.RequireUppercase = false;
+        //                options.Password.RequiredUniqueChars = 0;
+        //            });
+        //        }
+
+        //        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        //        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        //        {
+        //            if (env.IsDevelopment())
+        //            {
+        //                app.UseDeveloperExceptionPage();
+        //                app.UseMigrationsEndPoint();
+        //            }
+        //            else
+        //            {
+        //                app.UseExceptionHandler("/Home/Error");
+        //                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+        //                app.UseHsts();
+        //            }
+        //            app.UseHttpsRedirection();
+        //            app.UseStaticFiles();
+
+        //            app.UseRouting();
+
+        //            app.UseAuthentication();
+        //            app.UseAuthorization();
+
+        //            app.UseEndpoints(endpoints =>
+        //            {
+        //                endpoints.MapControllerRoute(
+        //                    name: "default",
+        //                    pattern: "{controller=Home}/{action=Index}/{id?}");
+        //                endpoints.MapRazorPages();
+        //            });
+        //        }
+        //    }
+        //}
+        
+        
+            public Startup(IConfiguration configuration)
             {
-                options.Password.RequireDigit = false;
-                options.Password.RequiredLength = 5;
-                options.Password.RequireLowercase = false;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = false;
-                options.Password.RequiredUniqueChars = 0;
-            });
-        }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseMigrationsEndPoint();
+                Configuration = configuration;
             }
-            else
+
+            public IConfiguration Configuration { get; }
+
+            // This method gets called by the runtime. Use this method to add services to the container.
+            public void ConfigureServices(IServiceCollection services)
             {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                services.AddDbContext<ApplicationDbContext>(options =>
+                    options.UseSqlServer(
+                        Configuration.GetConnectionString("DefaultConnection")));
+                services.AddDatabaseDeveloperPageExceptionFilter();
+                //services.AddRazorPages();
+                //services.AddIdentity<ProductsUser, IdentityRole>()
+                //    .AddEntityFrameworkStores<ApplicationDbContext>()
+                //    .AddDefaultTokenProviders();
+                services.AddDefaultIdentity<ProductsUser>()
+                    .AddRoles<IdentityRole>()
+                    .AddEntityFrameworkStores<ApplicationDbContext>()
+                    .AddDefaultTokenProviders();
+                services.AddControllersWithViews();
+                services.AddRazorPages();
+                services.Configure<IdentityOptions>(option =>
+                {
+                    option.SignIn.RequireConfirmedEmail = false;
+                    option.Password.RequireDigit = false;
+                    option.Password.RequiredLength = 5;
+                    option.Password.RequireLowercase = false;
+                    option.Password.RequireNonAlphanumeric = false;
+                    option.Password.RequireUppercase = false;
+                    option.Password.RequiredUniqueChars = 0;
+                }
+                );
             }
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
 
-            app.UseRouting();
-
-            app.UseAuthentication();
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
+            // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapRazorPages();
-            });
+                app.PrepareDatabase();
+                if (env.IsDevelopment())
+                {
+                    app.UseDeveloperExceptionPage();
+                    app.UseMigrationsEndPoint();
+                }
+                else
+                {
+                    app.UseExceptionHandler("/Home/Error");
+                    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                    app.UseHsts();
+                }
+                app.UseHttpsRedirection();
+                app.UseStaticFiles();
+
+                app.UseRouting();
+
+                app.UseAuthentication();
+                app.UseAuthorization();
+
+                app.UseEndpoints(endpoints =>
+                {
+                    endpoints.MapControllerRoute(
+                        name: "default",
+                        pattern: "{controller=Home}/{action=Index}/{id?}");
+                    endpoints.MapRazorPages();
+                });
+            }
         }
     }
-}
