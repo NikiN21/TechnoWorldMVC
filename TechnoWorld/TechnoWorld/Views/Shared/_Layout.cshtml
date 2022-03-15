@@ -32,18 +32,22 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Contacts" asp-action="Contacts">Contacts</a>
                         </li>
-                        @*<li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Create">Create</a>
-        </li>*@
-                        <li class="nav-item">
+                     <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="All">Продукти</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Accessory" asp-action="All">Аксесоари </a>
 
                         </li>
-                      
-                            </div>
+                        @if ((this.User.Identity.IsAuthenticated) && (this.User.IsInRole("Administrator")))
+                        {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Client" asp-action="All">Clients </a>
+
+                        </li>
+                        }
+
+</div>
                         </div>
                    
                                     
