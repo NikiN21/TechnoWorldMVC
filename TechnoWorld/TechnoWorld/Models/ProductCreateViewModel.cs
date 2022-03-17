@@ -9,12 +9,12 @@ namespace TechnoWorld.Models
     public class ProductCreateViewModel
     {
         public int Id { get; set; }
-        [Required]
-        [Display(Name = "Category")]
-        public string Category { get; set; }
-        [Required]
-        [Display(Name = "Brand")]
-        public string Brand { get; set; }
+        //[Required]
+        //[Display(Name = "Category")]
+        //public string Category { get; set; }
+        //[Required]
+        //[Display(Name = "Brand")]
+        //public string Brand { get; set; }
         [Required]
         [Display(Name = "Model")]
         public string Model { get; set; }

@@ -36,12 +36,12 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.Category)
-            </th>
-            <th>
+            </th>*@
+            @*<th>
                 @Html.DisplayNameFor(model => model.Brand)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Model)
             </th>
@@ -68,12 +68,12 @@
         @foreach (var item in Model)
         {
         <tr>
-            <td>
+            @*<td>
                 @Html.DisplayFor(model => item.Category)
-            </td>
-            <td>
+            </td>*@
+            @*<td>
                 @Html.DisplayFor(model => item.Brand)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(model => item.Model)
             </td>
@@ -90,7 +90,7 @@
                 @Html.DisplayFor(model => item.Quantity)
             </td>
             <td>
-                @Html.DisplayFor(model => item.Discount)
+                @Html.DisplayFor(model => item.Discount )
             </td>
             <td>
                 <a asp-action="Edit" asp-controller="Product" asp-route-id="@item.Id">

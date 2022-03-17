@@ -13,11 +13,11 @@ namespace TechnoWorld.Models
         [Display(Name = "Model")]
         public string Model { get; set; }
 
-        [Display(Name = "Category")]
-        public string Category { get; set; }
+        //[Display(Name = "Category")]
+        //public string Category { get; set; }
 
-        [Display(Name = "Brand")]
-        public string Brand { get; set; }
+        //[Display(Name = "Brand")]
+        //public string Brand { get; set; }
 
         [Display(Name = "Description")]
         public string Description { get; set; }

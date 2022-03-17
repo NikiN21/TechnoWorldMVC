@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TechnoWorld.Data;
+using TechnoWorld.Domain;
 using TechnoWorld.Entities;
 
 namespace TechnoWorld.Infrastructure
@@ -17,12 +19,54 @@ namespace TechnoWorld.Infrastructure
 
             var services = serviceScope.ServiceProvider;
 
+
             await RoleSeeder(services);
             await SeedAdministrator(services);
+
+            var dataCategory = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            SeedCategories(dataCategory);
+
+            var dataBrand = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            SeedBrands(dataBrand);
 
 
             return app;
         }
+        private static void SeedCategories(ApplicationDbContext data)
+        {
+            if (data.Categories.Any())
+            {
+                return;
+            }
+            data.Categories.AddRange(new[]
+            {
+                new Category {Name="Laptop"},
+                new Category {Name="Monitor"},
+                new Category {Name="Accessory"},
+
+            });
+            data.SaveChanges();
+        }
+        private static void SeedBrands(ApplicationDbContext data)
+        {
+            if (data.Brands.Any())
+            {
+                return;
+            }
+            data.Brands.AddRange(new[]
+            {
+                new Brand {Name="Lenovo"},
+                new Brand {Name="Samsung"},
+                new Brand {Name="HP"},
+                new Brand {Name="DELL"},
+                new Brand {Name="Acer"},
+                new Brand {Name="Huawei"},
+
+            });
+            data.SaveChanges();
+        }
+
+
 
         private static async Task RoleSeeder(IServiceProvider serviceProvider)
         {

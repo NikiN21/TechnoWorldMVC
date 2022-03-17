@@ -17,11 +17,14 @@ namespace TechnoWorld.Data
             this.Database.EnsureCreated();
         }
         public DbSet<Product> Products { get; set; }
-        public DbSet<Accessory> Accessories { get; set; }
-        public DbSet<Promo> Promos { get; set; }
-        public DbSet<TechnoWorld.Models.ProductCreateViewModel> ProductCreateViewModel { get; set; }
-        public DbSet<TechnoWorld.Models.AccessoryCreateViewModel> AccessoryCreateViewModel { get; set; }
-        public DbSet<TechnoWorld.Models.PromoCreateViewModel> PromoCreateViewModel { get; set; }
-        public DbSet<TechnoWorld.Models.ClientBindingAllViewModel> ClientBindingAllViewModel { get; set; }
+     
+                public DbSet<Category> Categories { get; set; }
+        public DbSet<Brand> Brands { get; set; }
+
+        //public DbSet<TechnoWorld.Models.ProductCreateViewModel> ProductCreateViewModel { get; set; }
+
+        //public DbSet<TechnoWorld.Models.ClientBindingAllViewModel> ClientBindingAllViewModel { get; set; }
+      //  public object Category { get; internal set; }
+
     }
 }

@@ -17,9 +17,11 @@ namespace TechnoWorld.Domain
         public string Model { get; set; }
         [Required]
         
-        public string Category { get; set; }
+        public int CategoryId { get; set; }
+        public virtual Category Category { get; set; }
         [Required]
-        public string Brand { get; set; }
+        public int BrandId { get; set; }
+        public virtual Brand Brand { get; set; }
         [Required]
         public string Description { get; set; }
         public string Picture { get; set; }
