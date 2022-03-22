@@ -11,9 +11,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TechnoWorld.Abstractions;
 using TechnoWorld.Data;
 using TechnoWorld.Entities;
 using TechnoWorld.Infrastructure;
+using TechnoWorld.Services;
 
 namespace TechnoWorld
 {
@@ -30,7 +32,8 @@ namespace TechnoWorld
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
+            options.UseLazyLoadingProxies()
+                .UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -39,6 +42,11 @@ namespace TechnoWorld
                  .AddEntityFrameworkStores<ApplicationDbContext>()
                  .AddDefaultTokenProviders();
             services.AddControllersWithViews();
+
+
+            services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<IProductService, ProductService>();
+
             services.AddRazorPages();
             services.Configure<IdentityOptions>(option =>
             {

@@ -23,11 +23,11 @@ namespace TechnoWorld.Infrastructure
             await RoleSeeder(services);
             await SeedAdministrator(services);
 
-            var dataCategory = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-            SeedCategories(dataCategory);
+            var data = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            SeedCategories(data);
 
-            var dataBrand = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-            SeedBrands(dataBrand);
+           // var dataBrand = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            //SeedBrands(dataBrand);
 
 
             return app;
@@ -47,24 +47,24 @@ namespace TechnoWorld.Infrastructure
             });
             data.SaveChanges();
         }
-        private static void SeedBrands(ApplicationDbContext data)
-        {
-            if (data.Brands.Any())
-            {
-                return;
-            }
-            data.Brands.AddRange(new[]
-            {
-                new Brand {Name="Lenovo"},
-                new Brand {Name="Samsung"},
-                new Brand {Name="HP"},
-                new Brand {Name="DELL"},
-                new Brand {Name="Acer"},
-                new Brand {Name="Huawei"},
+        //private static void SeedBrands(ApplicationDbContext data)
+        //{
+        //    if (data.Brands.Any())
+        //    {
+        //        return;
+        //    }
+        //    data.Brands.AddRange(new[]
+        //    {
+        //        new Brand {Name="Lenovo"},
+        //        new Brand {Name="Samsung"},
+        //        new Brand {Name="HP"},
+        //        new Brand {Name="DELL"},
+        //        new Brand {Name="Acer"},
+        //        new Brand {Name="Huawei"},
 
-            });
-            data.SaveChanges();
-        }
+        //    });
+        //    data.SaveChanges();
+        //}
 
 
 
