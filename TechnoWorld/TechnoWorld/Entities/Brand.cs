@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
-namespace TechnoWorld.Domain
+using TechnoWorld.Entities;
+namespace TechnoWorld.Entities
 {
-    public class Category
+    public class Brand
     {
         public int Id { get; set; }
         public string Name { get; set; }

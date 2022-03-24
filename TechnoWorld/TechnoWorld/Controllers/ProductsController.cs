@@ -5,8 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TechnoWorld.Abstractions;
-using TechnoWorld.Domain;
-using TechnoWorld.Models.Category;
+
+using TechnoWorld.Entities;
+using TechnoWorld.Models.Brand;
 using TechnoWorld.Models.Product;
 
 namespace TechnoWorld.Controllers
@@ -15,28 +16,51 @@ namespace TechnoWorld.Controllers
     {
         private readonly IProductService _productService;
         private readonly ICategoryService _categoryService;
+        private readonly IBrandService _brandService;
+        // private readonly IWebHostEnvironment _hostEnvironment;
 
 
-        public ProductsController(IProductService productService, ICategoryService categoryService)
+        public ProductsController(IProductService productService, ICategoryService categoryService, IBrandService brandService) //IWebHostEnvironment hostEnvironment 
         {
-            _productService = productService;
-            _categoryService = categoryService;
+           this._productService = productService;
+            this._categoryService = categoryService;
+            this._brandService = brandService;
+            //this._hostEnvironment = hostEnvironment;
         }
         // GET: ProductsController
 
         public ActionResult Create()
         {
             var product = new ProductCreateVM();
+
             product.Categories = _categoryService.GetCategories()
              .Select(c => new CategoryChoiceVM()
-             {
-                 Id = c.Id,
+          
+             { 
                  Name = c.Name,
+                 Id = c.Id,
+                
 
              })
         .ToList();
+
+
+            product.Brands = _brandService.GetBrands()
+             .Select(c => new BrandChoiceVM()
+             {
+                 Name = c.Name,
+                Id = c.Id,
+                
+
+             })
+
+        .ToList();
+
+
             return View(product);
         }
+       
+
 
 
         [HttpPost]
@@ -46,7 +70,7 @@ namespace TechnoWorld.Controllers
         {
             if (ModelState.IsValid)
             {
-                var created = _productService.Create(product.CategoryId, product.Brand, product.Model, product.Description, product.Picture, product.Price, product.Quantity, product.Discount);
+                var created = _productService.Create(product.CategoryId, product.Model, product.BrandId, product.Description, product.Image, product.Price, product.Quantity, product.Discount);
                 if (created)
                 {
                     return this.RedirectToAction("Success");
@@ -77,9 +101,9 @@ namespace TechnoWorld.Controllers
                 Id = item.Id,
                 CategoryId = item.CategoryId,
                 Model = item.Model,
-                Brand = item.Brand,
+                BrandId = item.BrandId,
                 Description = item.Description,
-                Picture = item.Picture,
+                Image = item.Image,
                 Price = item.Price,
                 Quantity = item.Quantity,
                 Discount = item.Discount
@@ -92,7 +116,7 @@ namespace TechnoWorld.Controllers
         {
             if (ModelState.IsValid)
             {
-                var updated = _productService.UpdateProduct(id, bindingModel.CategoryId, bindingModel.Model, bindingModel.Brand, bindingModel.Description, bindingModel.Picture, bindingModel.Price, bindingModel.Quantity, bindingModel.Discount);
+                var updated = _productService.UpdateProduct(id, bindingModel.CategoryId, bindingModel.BrandId, bindingModel.Model, bindingModel.Description, bindingModel.Image, bindingModel.Price, bindingModel.Quantity, bindingModel.Discount);
                 if (updated)
                 {
                     return this.RedirectToAction("All");
@@ -115,9 +139,9 @@ namespace TechnoWorld.Controllers
                 Id = item.Id,
                 CategoryId = item.CategoryId,
                 Model = item.Model,
-                Brand = item.Brand,
+                BrandId = item.BrandId,
                 Description = item.Description,
-                Picture = item.Picture,
+                Image = item.Image,
                 Price = item.Price,
                 Quantity = item.Quantity,
                 Discount = item.Discount
@@ -137,17 +161,17 @@ namespace TechnoWorld.Controllers
                 return View();
             }
         }
-        public IActionResult All(string searchStringModel, string searchStringBrand)
+        public IActionResult All(string searchStringModel, string searchStringDescription)
         {
-            List<ProductAllVM> products = _productService.GetProducts(searchStringModel, searchStringBrand)
+            List<ProductAllVM> products = _productService.GetProducts(searchStringModel, searchStringDescription)
             .Select(productFromDb => new ProductAllVM
             {
                 Id = productFromDb.Id,
                 CategoryId = productFromDb.CategoryId,
                 Model = productFromDb.Model,
-                Brand = productFromDb.Brand,
+                BrandId = productFromDb.BrandId,
                 Description = productFromDb.Description,
-                Picture = productFromDb.Picture,
+                Image = productFromDb.Image,
                 Price = productFromDb.Price,
                 Quantity = productFromDb.Quantity,
                 Discount = productFromDb.Discount

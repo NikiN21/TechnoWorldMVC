@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TechnoWorld.Domain
+namespace TechnoWorld.Entities
 {
     public class Product
     {
@@ -20,17 +20,20 @@ namespace TechnoWorld.Domain
         public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
         [Required]
-        public string Brand { get; set; }
-        //public virtual Brand Brand { get; set; }
+        public int BrandId { get; set; }
+        public virtual Brand Brand { get; set; }
         [Required]
         public string Description { get; set; }
-        public string Picture { get; set; }
-        [Required]
-        [Range(50, 4000)]
-        public int Price { get; set; }
+       
+        public string Image { get; set; }
+        //public virtual Image Image { get; set; }
 
-        public int Quantity { get; set; }
-        public int Discount { get; set; }
+        [Required]
+        
+        public decimal Price { get; set; }
+
+        public decimal Quantity { get; set; }
+        public decimal Discount { get; set; }
 
     }
 }

@@ -14,19 +14,23 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="CategoryId" class="control-label"></label>
-                <select asp-for="CategoryId" class="form-control" >
-                @foreach (var category in Model.Categories)
-                {
-                    <option value=" @category.Id">@category.Name</option>
+                <select asp-for="CategoryId" class="form-control">
+                    @foreach (var category in Model.Categories)
+                    {
+                        <option value=" @category.Id">@category.Name</option>
 
-                }
+                    }
+                </select>
+                <span asp-validation-for="BrandId" class="text-danger"></span>
+                <label asp-for="BrandId" class="control-label"></label>
+                <select asp-for="BrandId" class="form-control">
+                    @foreach (var brand in Model.Brands)
+                    {
+                        <option value=" @brand.Id">@brand.Name</option>
+
+                    }
                 </select>
                 <span asp-validation-for="CategoryId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Brand" class="control-label"></label>
-                <input asp-for="Brand" class="form-control" />
-                <span asp-validation-for="Brand" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Model" class="control-label"></label>
@@ -39,9 +43,9 @@
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Picture" class="control-label"></label>
-                <input asp-for="Picture" class="form-control" />
-                <span asp-validation-for="Picture" class="text-danger"></span>
+                <label asp-for="Image" class="control-label"></label>
+                <input asp-for="Image" class="form-control" />
+                <span asp-validation-for="Image" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Price" class="control-label"></label>
@@ -66,7 +70,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="All">Back to List</a>
 </div>
 
 @section Scripts {

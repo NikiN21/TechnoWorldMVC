@@ -46,6 +46,7 @@ namespace TechnoWorld
 
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<IBrandService, BrandService>();
 
             services.AddRazorPages();
             services.Configure<IdentityOptions>(option =>

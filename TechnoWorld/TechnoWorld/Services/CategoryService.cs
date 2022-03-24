@@ -4,7 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using TechnoWorld.Abstractions;
 using TechnoWorld.Data;
-using TechnoWorld.Domain;
+
+using TechnoWorld.Entities;
 
 namespace TechnoWorld.Services
 {

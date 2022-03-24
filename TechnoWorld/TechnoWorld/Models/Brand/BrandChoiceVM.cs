@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace TechnoWorld.Models.Brand
 {
-    public class CategoryChoiceVM
+    public class BrandChoiceVM
     {
         public int Id { get; set; }
-        [Display(Name = "Category")]
+        [Display(Name = "Brand")]
         public string Name { get; set; }
        
     }

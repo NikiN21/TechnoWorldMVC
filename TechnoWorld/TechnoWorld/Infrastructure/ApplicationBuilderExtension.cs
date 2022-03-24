@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TechnoWorld.Data;
-using TechnoWorld.Domain;
+
 using TechnoWorld.Entities;
 
 namespace TechnoWorld.Infrastructure
@@ -23,48 +23,50 @@ namespace TechnoWorld.Infrastructure
             await RoleSeeder(services);
             await SeedAdministrator(services);
 
-            var data = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-            SeedCategories(data);
+            var dataCategory = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            SeedCategories(dataCategory);
 
-           // var dataBrand = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-            //SeedBrands(dataBrand);
+            var dataBrand = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            SeedBrands(dataBrand);
 
 
             return app;
         }
-        private static void SeedCategories(ApplicationDbContext data)
+        private static void SeedCategories(ApplicationDbContext dataCategory)
         {
-            if (data.Categories.Any())
+            if (dataCategory.Categories.Any())
             {
                 return;
             }
-            data.Categories.AddRange(new[]
+            dataCategory.Categories.AddRange(new[]
             {
                 new Category {Name="Laptop"},
                 new Category {Name="Monitor"},
                 new Category {Name="Accessory"},
 
             });
-            data.SaveChanges();
+            dataCategory.SaveChanges();
         }
-        //private static void SeedBrands(ApplicationDbContext data)
-        //{
-        //    if (data.Brands.Any())
-        //    {
-        //        return;
-        //    }
-        //    data.Brands.AddRange(new[]
-        //    {
-        //        new Brand {Name="Lenovo"},
-        //        new Brand {Name="Samsung"},
-        //        new Brand {Name="HP"},
-        //        new Brand {Name="DELL"},
-        //        new Brand {Name="Acer"},
-        //        new Brand {Name="Huawei"},
-
-        //    });
-        //    data.SaveChanges();
-        //}
+        private static void SeedBrands(ApplicationDbContext dataBrand)
+        {
+            if (dataBrand.Brands.Any())
+            {
+                return;
+            }
+            dataBrand.Brands.AddRange(new[]
+            { 
+                new Brand {Name="Acer"},
+                new Brand {Name="Asus"},
+                new Brand {Name="Apple"},
+                new Brand {Name="DELL"}, 
+                new Brand {Name="HP"}, 
+                new Brand {Name="Huawei"},
+                new Brand {Name="Lenovo"},
+                new Brand {Name="Samsung"},
+  
+            });
+            dataBrand.SaveChanges();
+        }
 
 
 
