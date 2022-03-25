@@ -168,8 +168,10 @@ namespace TechnoWorld.Controllers
             {
                 Id = productFromDb.Id,
                 CategoryId = productFromDb.CategoryId,
+                CategoryName = productFromDb.Category.Name,
                 Model = productFromDb.Model,
                 BrandId = productFromDb.BrandId,
+                BrandName = productFromDb.Brand.Name,
                 Description = productFromDb.Description,
                 Image = productFromDb.Image,
                 Price = productFromDb.Price,

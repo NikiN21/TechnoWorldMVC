@@ -11,10 +11,12 @@ namespace TechnoWorld.Models.Product
         public int Id { get; set; }
         [Display(Name = "Category")]
         public int CategoryId { get; set; }
+        public string CategoryName { get; set; }
 
       
         [Display(Name = "Brand")]
         public int BrandId { get; set; }
+        public string BrandName { get; set; }
         [Display(Name = "Model")]
         public string Model { get; set; }
 
