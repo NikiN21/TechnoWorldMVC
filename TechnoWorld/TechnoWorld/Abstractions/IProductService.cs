@@ -10,12 +10,12 @@ namespace TechnoWorld.Abstractions
 {
     public interface IProductService
     {
-        //Task Create(ProductCreateVM model, string imagePath);
-        bool Create( int categoryId, string model, int brandId, string description, string image, decimal price, decimal quantity, decimal discount);
+        Task Create(ProductCreateVM model, string imagePath);
+       // bool Create( int categoryId, string model, int brandId, string description, string image, decimal price, decimal quantity, decimal discount);
 
-        bool UpdateProduct(int productId, int categoryId,int brandId, string model,   string description, string image, decimal price, decimal quantity, decimal discount);
+        bool UpdateProduct(int productId, int categoryId,int brandId, string model,   string description,  decimal price, decimal quantity, decimal discount);
 
-       List<Product> GetProducts();
+       List<ProductAllVM> GetProducts();
 
         Product GetProductById(int productId);
 

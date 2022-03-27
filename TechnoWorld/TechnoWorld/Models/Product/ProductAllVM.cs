@@ -12,8 +12,8 @@ namespace TechnoWorld.Models.Product
         [Display(Name = "Category")]
         public int CategoryId { get; set; }
         public string CategoryName { get; set; }
-
-      
+        public string Category { get; set; }
+        public string Brand { get; set; }
         [Display(Name = "Brand")]
         public int BrandId { get; set; }
         public string BrandName { get; set; }
@@ -24,7 +24,7 @@ namespace TechnoWorld.Models.Product
         public string Description { get; set; }
 
         [Display(Name = "Image Picture")]
-        public string Image { get; set; }
+        public string ImageUrl { get; set; }
 
         [Display(Name = "Price")]
         public decimal Price { get; set; }

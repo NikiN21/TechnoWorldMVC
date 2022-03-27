@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -17,15 +18,16 @@ namespace TechnoWorld.Controllers
         private readonly IProductService _productService;
         private readonly ICategoryService _categoryService;
         private readonly IBrandService _brandService;
-        // private readonly IWebHostEnvironment _hostEnvironment;
+         private readonly IWebHostEnvironment _hostEnvironment;
 
 
-        public ProductsController(IProductService productService, ICategoryService categoryService, IBrandService brandService) //IWebHostEnvironment hostEnvironment 
+        public ProductsController(IProductService productService, ICategoryService categoryService, IBrandService brandService, IWebHostEnvironment hostEnvironment )
         {
            this._productService = productService;
             this._categoryService = categoryService;
+            this._hostEnvironment = hostEnvironment;
             this._brandService = brandService;
-            //this._hostEnvironment = hostEnvironment;
+           
         }
         // GET: ProductsController
 
@@ -35,49 +37,61 @@ namespace TechnoWorld.Controllers
 
             product.Categories = _categoryService.GetCategories()
              .Select(c => new CategoryChoiceVM()
-          
-             { 
+             {
                  Name = c.Name,
                  Id = c.Id,
-                
-
              })
         .ToList();
-
-
             product.Brands = _brandService.GetBrands()
              .Select(c => new BrandChoiceVM()
              {
                  Name = c.Name,
-                Id = c.Id,
-                
-
+                 Id = c.Id,
              })
-
         .ToList();
-
-
             return View(product);
         }
-       
+
 
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public ActionResult Create([FromForm] ProductCreateVM product)
+        public async Task<ActionResult> Create([FromForm] ProductCreateVM input)
         {
-            if (ModelState.IsValid)
+            var imagePath = $"{this._hostEnvironment.WebRootPath}";
+            if (!ModelState.IsValid)
             {
-                var created = _productService.Create(product.CategoryId, product.Model, product.BrandId, product.Description, product.Image, product.Price, product.Quantity, product.Discount);
-                if (created)
-                {
-                    return this.RedirectToAction("Success");
-                }
+                input.Categories = _categoryService.GetCategories()
+                    .Select(c => new CategoryChoiceVM()
+                    {
+                        Id = c.Id,
+                        Name = c.Name
+                    })
+                    .ToList();
+                input.Brands = _brandService.GetBrands()
+                    .Select(c => new BrandChoiceVM()
+                    {
+                        Id = c.Id,
+                        Name = c.Name
+                    })
+                    .ToList();
+                return View(input);
             }
-            return View(product);
+            await this._productService.Create(input, imagePath);
+            return RedirectToAction(nameof(All));
         }
+            //if (ModelState.IsValid)
+            //{
+            //    var created = _productService.Create(product.CategoryId, product.Model, product.BrandId, product.Description, product.Image, product.Price, product.Quantity, product.Discount);
+            //    if (created)
+            //    {
+            //        return this.RedirectToAction("Success");
+            //    }
+            //}
+            //return View(product);
+        
 
         public ActionResult Success()
         {
@@ -103,7 +117,7 @@ namespace TechnoWorld.Controllers
                 Model = item.Model,
                 BrandId = item.BrandId,
                 Description = item.Description,
-                Image = item.Image,
+              
                 Price = item.Price,
                 Quantity = item.Quantity,
                 Discount = item.Discount
@@ -116,7 +130,7 @@ namespace TechnoWorld.Controllers
         {
             if (ModelState.IsValid)
             {
-                var updated = _productService.UpdateProduct(id, bindingModel.CategoryId, bindingModel.BrandId, bindingModel.Model, bindingModel.Description, bindingModel.Image, bindingModel.Price, bindingModel.Quantity, bindingModel.Discount);
+                var updated = _productService.UpdateProduct(id, bindingModel.CategoryId, bindingModel.BrandId, bindingModel.Model, bindingModel.Description, bindingModel.Price, bindingModel.Quantity, bindingModel.Discount);
                 if (updated)
                 {
                     return this.RedirectToAction("All");
@@ -141,7 +155,7 @@ namespace TechnoWorld.Controllers
                 Model = item.Model,
                 BrandId = item.BrandId,
                 Description = item.Description,
-                Image = item.Image,
+            
                 Price = item.Price,
                 Quantity = item.Quantity,
                 Discount = item.Discount
@@ -161,39 +175,62 @@ namespace TechnoWorld.Controllers
                 return View();
             }
         }
-        public IActionResult All(string searchStringModel, string searchStringDescription)
+        public ActionResult All(string searchStringModel, string searchStringDescription)
         {
-            List<ProductAllVM> products = _productService.GetProducts(searchStringModel, searchStringDescription)
-            .Select(productFromDb => new ProductAllVM
-            {
-                Id = productFromDb.Id,
-                CategoryId = productFromDb.CategoryId,
-                CategoryName = productFromDb.Category.Name,
-                Model = productFromDb.Model,
-                BrandId = productFromDb.BrandId,
-                BrandName = productFromDb.Brand.Name,
-                Description = productFromDb.Description,
-                Image = productFromDb.Image,
-                Price = productFromDb.Price,
-                Quantity = productFromDb.Quantity,
-                Discount = productFromDb.Discount
-            }).ToList();
-            //if (!String.IsNullOrEmpty(searchStringModel) && !String.IsNullOrEmpty(searchStringBrand))
+            //List<ProductAllVM> products = _productService.GetProducts(searchStringModel, searchStringDescription)
+            //.Select(productFromDb => new ProductAllVM
             //{
-            //    products = products.Where(d => d.Model.Contains(searchStringModel) && d.Brand.Contains(searchStringBrand)).ToList();
-            //}
-            //else if (!String.IsNullOrEmpty(searchStringModel))
-            //{
-            //    products = products.Where(d => d.Model.Contains(searchStringModel)).ToList();
-            //}
-            //else if (!string.IsNullOrEmpty(searchStringBrand))
-            //{
-            //    products = products.Where(d => d.Brand.Contains(searchStringBrand)).ToList();
-            //}
+            //    Id = productFromDb.Id,
+            //    CategoryId = productFromDb.CategoryId,
+            //    CategoryName = productFromDb.Category.Name,
+            //    Model = productFromDb.Model,
+            //    BrandId = productFromDb.BrandId,
+            //    BrandName = productFromDb.Brand.Name,
+            //    Description = productFromDb.Description,
+            //    ImageUrl=productFromDb.ImageUrl,
+            //    Price = productFromDb.Price,
+            //    Quantity = productFromDb.Quantity,
+            //    Discount = productFromDb.Discount
+            //}).ToList();
+
+            var products = _productService.GetProducts();
             return this.View(products);
         }
 
-    }
+        //List<ProductAllVM> orders = context
+        //        .Orders
+        //        .Where(x => x.CustomerId == user.Id)
+        //        .Select(x => new ProductAllVM
+        //        {
+        //            Id = x.Id,
+        //            EventId = x.EventureId,
+        //            EventName = x.Eventure.Name,
+        //            EventStart = x.Eventure.Start.ToString("dd-mm-yyyy hh:mm", CultureInfo.InvariantCulture),
+        //            EventEnd = x.Eventure.End.ToString("dd-mm-yyyy hh:mm", CultureInfo.InvariantCulture),
+        //            EventPlace = x.Eventure.Place,
+        //            OrderedOn = x.OrderedOn.ToString("dd-mm-yyyy hh:mm", CultureInfo.InvariantCulture),
+        //            CustomerId = x.CustomerId,
+        //            CustomerUsername = x.Customer.UserName,
+        //            TicketsCount = x.TicketsCount
+
+
+                    //if (!String.IsNullOrEmpty(searchStringModel) && !String.IsNullOrEmpty(searchStringBrand))
+                    //{
+                    //    products = products.Where(d => d.Model.Contains(searchStringModel) && d.Brand.Contains(searchStringBrand)).ToList();
+                    //}
+                    //else if (!String.IsNullOrEmpty(searchStringModel))
+                    //{
+                    //    products = products.Where(d => d.Model.Contains(searchStringModel)).ToList();
+                    //}
+                    //else if (!string.IsNullOrEmpty(searchStringBrand))
+                    //{
+                    //    products = products.Where(d => d.Brand.Contains(searchStringBrand)).ToList();
+                    //}
+
+
+
+
+                }
 }
           
 

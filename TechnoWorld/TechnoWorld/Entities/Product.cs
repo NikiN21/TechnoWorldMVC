@@ -25,8 +25,8 @@ namespace TechnoWorld.Entities
         [Required]
         public string Description { get; set; }
        
-        public string Image { get; set; }
-        //public virtual Image Image { get; set; }
+        public string ImageId { get; set; }
+        public virtual Image Image { get; set; }
 
         [Required]
         
@@ -34,6 +34,7 @@ namespace TechnoWorld.Entities
 
         public decimal Quantity { get; set; }
         public decimal Discount { get; set; }
+
 
     }
 }

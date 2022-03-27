@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using TechnoWorld.Abstractions;
 using TechnoWorld.Data;
-
 using TechnoWorld.Entities;
 using TechnoWorld.Models.Product;
 
@@ -20,74 +20,71 @@ namespace TechnoWorld.Services
             _context = context;
         }
 
-        public bool Create(int categoryId, string model, int brandId, string description, string image, decimal price, decimal quantity, decimal discount)
-        {
-            var product = new Product
-            {
-
-                Model = model,
-                Category = _context.Categories.Find(categoryId),
-                Brand = _context.Brands.Find(brandId),
-                Description = description,
-                Image = image,
-                Quantity = quantity,
-                Discount = discount,
-            };
-            _context.Products.Add(product);
-            return _context.SaveChanges() != 0;
-        }
-
-
-
-
-
-
-        //public Task Create(ProductCreateVM model, string imagePath)
+        //public bool Create(int categoryId,  int brandId, string model, string description, decimal price, decimal quantity, decimal discount)
         //{
-        //    var extension = Path.GetExtension(model.Image.FileName).TrimStart('.');
-
         //    var product = new Product
         //    {
-        //        Model = model.Model,
-        //        CategoryId = model.CategoryId,
-        //        Brand = model.Brand,
-        //        Description = model.Description,
-        //       // Image=model.Image,
-        //        Quantity = model.Quantity,
-        //        Discount = model.Discount,
+
+        //        Model = model,
+        //        Category = _context.Categories.Find(categoryId),
+        //        Brand = _context.Brands.Find(brandId),
+        //        Description = description,
+               
+        //        Quantity = quantity,
+        //        Discount = discount,
         //    };
-
-        //    //id се създава автоматично при създаване на обект
-        //    var dbImage = new Image()
-        //    {
-        //        Product = product,
-        //        Extension = extension
-        //    };
-
-        //    //връзваме снимката за кучето
-        //    product.ImageId = dbImage.Id;
-
-        //    //създаваме папката images, ако не съществува
-        //    Directory.CreateDirectory($"{imagePath}/images/");
-
-        //    //правим физически запис на файла в папка images     
-        //    var physicalPath = $"{imagePath}/images/{dbImage.Id}.{extension}";
-        //    using Stream fileStream = new FileStream(physicalPath, FileMode.Create);
-        //    await model.Image.CopyToAsync(fileStream);
-
-
-        //    //записваме данните за снимката
-        //    await this._context.Images.AddAsync(dbImage);
-
-        //    await this._context.Products.AddAsync(product);
-        //    await this._context.SaveChangesAsync();
+        //    _context.Products.Add(product);
+        //    return _context.SaveChanges() != 0;
         //}
 
+        public async Task Create(ProductCreateVM model, string imagePath)
+        {
+            var extension = Path.GetExtension(model.Image.FileName).TrimStart('.');
+            var product = new Product
+            {
+                CategoryId = model.CategoryId,
+                Model = model.Model,
+                BrandId = model.BrandId,
+                Price = model.Price,
+                Description = model.Description,
+                Quantity = model.Quantity,
+                Discount = model.Discount,
+
+            };
+
+            //id се създава автоматично при създаване на обект
+
+            var dbImage = new Image()
+            {
+                Product = product,
+                Extension = extension
+            };
+
+            //връзваме снимката за кучето
+
+            product.ImageId = dbImage.Id;
+
+            //създаваме папката images, ако не съществува
+            Directory.CreateDirectory($"{imagePath}/images/");
+            //правим физически запис на файла в папка images
+            var physicalPath = $"{ imagePath}/images/{dbImage.Id}.{ extension}";
+            using Stream fileStream = new FileStream(physicalPath, FileMode.Create);
+            await model.Image.CopyToAsync(fileStream);
+            //записваме данните за снимката
+
+            await this._context.Images.AddAsync(dbImage);
+            await this._context.Products.AddAsync(product);
+            await this._context.SaveChangesAsync();
+        }
 
         public Product GetProductById(int productId)
         {
             return _context.Products.Find(productId);
         }
+
+        
+
+
 
         public List<Product> GetProducts(string searchStringModel, string searchStringDescription)
         {
@@ -104,12 +101,6 @@ namespace TechnoWorld.Services
             {
                 products = products.Where(d => d.Description.Contains(searchStringDescription)).ToList();
             }
-                return products;
-            }
-
-        public List<Product> GetProducts()
-        {
-            List<Product> products = _context.Products.ToList();
             return products;
         }
 
@@ -126,7 +117,7 @@ namespace TechnoWorld.Services
             }
         }
 
-        public bool UpdateProduct(int productId, int categoryId, int brandId, string model, string description, string image, decimal price, decimal quantity, decimal discount)
+        public bool UpdateProduct(int productId, int categoryId, int brandId, string model, string description, decimal price, decimal quantity, decimal discount)
         {
             var product = GetProductById(productId);
             if (product == default(Product))
@@ -137,19 +128,40 @@ namespace TechnoWorld.Services
             product.Model = model;
             product.BrandId = brandId;
             product.Description = description;
-            product.Image = image;
+            
             product.Price = price;
             product.Quantity = quantity;
             product.Discount = discount;
             _context.Update(product);
             return _context.SaveChanges() != 0;
         }
+
+       public List<ProductAllVM> GetProducts()
+        {
+            List<ProductAllVM> products = _context.Products
+                .Select(d => new ProductAllVM
+                {
+                    Id = d.Id,
+                    CategoryId = d.CategoryId,
+                    CategoryName = d.Category.Name,
+                    Model = d.Model,
+                    BrandId = d.BrandId,
+                    BrandName = d.Brand.Name,
+                    Description = d.Description,
+                    ImageUrl = $"/images/{d.ImageId}.{d.Image.Extension}",
+                    Price = d.Price,
+                    Quantity = d.Quantity,
+                    Discount = d.Discount
+                }).ToList();
+
+            return products;
+        }
+    }
     }
    
    
 
 
-}
 
 
 

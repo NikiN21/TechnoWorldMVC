@@ -19,18 +19,18 @@ namespace TechnoWorld.Data
             this.Database.EnsureCreated();
         }
         public DbSet<Product> Products { get; set; }
-       // public DbSet<Image> Images { get; set; }
-
+        public DbSet<Image> Images { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Brand> Brands { get; set; }
+    
 
-        public DbSet<TechnoWorld.Models.Product.ProductCreateVM> ProductCreateVM { get; set; }
-     
-                public DbSet<TechnoWorld.Models.Brand.CategoryChoiceVM> CategoryChoiceVM { get; set; }
-        public DbSet<TechnoWorld.Models.Brand.BrandChoiceVM> BrandChoiceVM { get; set; }
+        //public DbSet<TechnoWorld.Models.Product.ProductCreateVM> ProductCreateVM { get; set; }
 
-        public DbSet<TechnoWorld.Models.Product.ProductAllVM> ProductAllVM { get; set; }
-  
+        //        public DbSet<TechnoWorld.Models.Brand.CategoryChoiceVM> CategoryChoiceVM { get; set; }
+        //public DbSet<TechnoWorld.Models.Brand.BrandChoiceVM> BrandChoiceVM { get; set; }
+
+        //public DbSet<TechnoWorld.Models.Product.ProductAllVM> ProductAllVM { get; set; }
+
 
         //  public DbSet<TechnoWorld.Models.ProductCreateViewModel> ProductCreateViewModel { get; set; }
 

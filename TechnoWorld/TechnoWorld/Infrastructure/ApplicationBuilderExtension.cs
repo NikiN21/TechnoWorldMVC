@@ -104,7 +104,7 @@ namespace TechnoWorld.Infrastructure
                 user.Email = "admin@admin.com";
 
                 var result = await userManager.CreateAsync
-                (user, "123!@#qweQWE");
+                (user, "123456");
 
                 if (result.Succeeded)
                 {
