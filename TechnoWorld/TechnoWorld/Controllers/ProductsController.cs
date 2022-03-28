@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,6 +13,7 @@ using TechnoWorld.Models.Brand;
 using TechnoWorld.Models.Product;
 
 namespace TechnoWorld.Controllers
+    
 {
     public class ProductsController : Controller
     {
@@ -30,7 +32,7 @@ namespace TechnoWorld.Controllers
            
         }
         // GET: ProductsController
-
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create()
         {
             var product = new ProductCreateVM();
@@ -175,6 +177,7 @@ namespace TechnoWorld.Controllers
                 return View();
             }
         }
+        [AllowAnonymous]
         public ActionResult All(string searchStringModel, string searchStringDescription)
         {
             //List<ProductAllVM> products = _productService.GetProducts(searchStringModel, searchStringDescription)

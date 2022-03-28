@@ -104,6 +104,43 @@ namespace TechnoWorld.Services
             return products;
         }
 
+
+
+
+        //public List<Product> GetAccessories(string searchStringModel, string searchStringDescription)
+        //{
+        //    List<Product> products = _context.Products.ToList();
+        //    if (!String.IsNullOrEmpty(searchStringModel) && !String.IsNullOrEmpty(searchStringDescription))
+        //    {
+        //        products = products.Where(d => d.Model.Contains(searchStringModel) && d.Description.Contains(searchStringDescription)).ToList();
+        //    }
+        //    else if (!String.IsNullOrEmpty(searchStringModel))
+        //    {
+        //        products = products.Where(d => d.Model.Contains(searchStringModel)).ToList();
+        //    }
+        //    else if (!string.IsNullOrEmpty(searchStringDescription))
+        //    {
+        //        products = products.Where(d => d.Description.Contains(searchStringDescription)).ToList();
+        //    }
+        //    {
+        //        if
+        //            {
+        //            Category 
+        //        }
+        //    }
+        //    return products;
+        //}
+
+
+
+
+
+
+
+
+
+
+
         public bool RemoveById(int productId)
         {
             {
@@ -156,8 +193,28 @@ namespace TechnoWorld.Services
 
             return products;
         }
+        //public List<ProductAllVM> GetAccessories()
+        //{
+        //    List<ProductAllVM> products = _context.Products
+        //        .Select(d => new ProductAllVM
+        //        {
+        //            Id = d.Id,
+        //            CategoryId = d.CategoryId,
+        //            CategoryName = d.Category.Name,
+        //            Model = d.Model,
+        //            BrandId = d.BrandId,
+        //            BrandName = d.Brand.Name,
+        //            Description = d.Description,
+        //            ImageUrl = $"/images/{d.ImageId}.{d.Image.Extension}",
+        //            Price = d.Price,
+        //            Quantity = d.Quantity,
+        //            Discount = d.Discount
+        //        }).ToList();
+
+        //    return products;
+        }
     }
-    }
+
    
    
 

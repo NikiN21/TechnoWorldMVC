@@ -16,13 +16,15 @@ namespace TechnoWorld.Abstractions
         bool UpdateProduct(int productId, int categoryId,int brandId, string model,   string description,  decimal price, decimal quantity, decimal discount);
 
        List<ProductAllVM> GetProducts();
+        //List<ProductAllVM> GetAccessories();
 
         Product GetProductById(int productId);
 
         bool RemoveById(int productId);
 
         List<Product> GetProducts(string searchStringModel, string searchStringDescription);
-      
+        //List<Product> GetAccessories(string searchStringModel, string searchStringDescription);
+
     }
 }
 
