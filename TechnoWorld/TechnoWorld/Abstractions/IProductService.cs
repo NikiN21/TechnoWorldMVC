@@ -22,7 +22,7 @@ namespace TechnoWorld.Abstractions
 
         bool RemoveById(int productId);
 
-        List<Product> GetProducts(string searchStringModel, string searchStringDescription);
+        List<Product> GetProducts(string searchStringCategoryName, string searchStringBrandName);
         //List<Product> GetAccessories(string searchStringModel, string searchStringDescription);
 
     }

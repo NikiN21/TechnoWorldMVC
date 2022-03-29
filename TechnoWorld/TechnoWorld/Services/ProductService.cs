@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -82,24 +83,21 @@ namespace TechnoWorld.Services
             return _context.Products.Find(productId);
         }
 
-        
 
-
-
-        public List<Product> GetProducts(string searchStringModel, string searchStringDescription)
+        public List<Product> GetProducts(string searchStringCategoryName, string searchStringBrandName)
         {
             List<Product> products = _context.Products.ToList();
-            if (!String.IsNullOrEmpty(searchStringModel) && !String.IsNullOrEmpty(searchStringDescription))
+            if (!String.IsNullOrEmpty(searchStringCategoryName) && !String.IsNullOrEmpty(searchStringBrandName))
             {
-                products = products.Where(d => d.Model.Contains(searchStringModel) && d.Description.Contains(searchStringDescription)).ToList();
+                products = products.Where(d => d.CategoryName.Contains(searchStringCategoryName) && d.BrandName.Contains(searchStringBrandName)).ToList();
             }
-            else if (!String.IsNullOrEmpty(searchStringModel))
+            else if (!String.IsNullOrEmpty(searchStringCategoryName))
             {
-                products = products.Where(d => d.Model.Contains(searchStringModel)).ToList();
+                products = products.Where(d => d.CategoryName.Contains(searchStringCategoryName)).ToList();
             }
-            else if (!string.IsNullOrEmpty(searchStringDescription))
+            else if (!string.IsNullOrEmpty(searchStringBrandName))
             {
-                products = products.Where(d => d.Description.Contains(searchStringDescription)).ToList();
+                products = products.Where(d => d.BrandName.Contains(searchStringBrandName)).ToList();
             }
             return products;
         }

@@ -178,7 +178,7 @@ namespace TechnoWorld.Controllers
             }
         }
         [AllowAnonymous]
-        public ActionResult All(string searchStringModel, string searchStringDescription)
+        public ActionResult All(string searchStringCategoryName, string searchStringBrandName)
         {
             //List<ProductAllVM> products = _productService.GetProducts(searchStringModel, searchStringDescription)
             //.Select(productFromDb => new ProductAllVM
@@ -197,6 +197,12 @@ namespace TechnoWorld.Controllers
             //}).ToList();
 
             var products = _productService.GetProducts();
+            if (!String.IsNullOrEmpty(searchStringCategoryName))
+            {
+                products = products.Where(x => x.CategoryName.ToLower() == searchStringCategoryName.ToLower())
+                    .ToList();
+
+            }
             return this.View(products);
         }
 

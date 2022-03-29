@@ -16,11 +16,12 @@ namespace TechnoWorld.Entities
         
         public string Model { get; set; }
         [Required]
-        
+        public string CategoryName { get; set; }
         public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
         [Required]
         public int BrandId { get; set; }
+        public string BrandName { get; set; }
         public virtual Brand Brand { get; set; }
         [Required]
         public string Description { get; set; }
