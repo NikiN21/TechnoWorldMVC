@@ -34,7 +34,7 @@ namespace TechnoWorld.Models.Product
        
         public decimal Price { get; set; }
        
-        public decimal Quantity { get; set; }
+        public int Quantity { get; set; }
         
         public decimal Discount { get; set; }
         public virtual List<CategoryChoiceVM> Categories { get; set; }

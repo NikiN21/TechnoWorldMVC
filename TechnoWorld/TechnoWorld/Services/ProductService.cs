@@ -154,7 +154,7 @@ namespace TechnoWorld.Services
             }
         }
 
-        public bool UpdateProduct(int productId, int categoryId, int brandId, string model, string description, decimal price, decimal quantity, decimal discount)
+        public bool UpdateProduct(int productId, int categoryId, int brandId, string model, string description, decimal price, int quantity, decimal discount)
         {
             var product = GetProductById(productId);
             if (product == default(Product))

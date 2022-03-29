@@ -13,7 +13,7 @@ namespace TechnoWorld.Abstractions
         Task Create(ProductCreateVM model, string imagePath);
        // bool Create( int categoryId, string model, int brandId, string description, string image, decimal price, decimal quantity, decimal discount);
 
-        bool UpdateProduct(int productId, int categoryId,int brandId, string model,   string description,  decimal price, decimal quantity, decimal discount);
+        bool UpdateProduct(int productId, int categoryId,int brandId, string model,   string description,  decimal price, int quantity, decimal discount);
 
        List<ProductAllVM> GetProducts();
         //List<ProductAllVM> GetAccessories();

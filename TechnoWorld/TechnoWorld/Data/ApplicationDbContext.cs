@@ -22,7 +22,9 @@ namespace TechnoWorld.Data
         public DbSet<Image> Images { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Brand> Brands { get; set; }
-    
+        public DbSet<Order> Orders { get; set; }
+
+
 
         //public DbSet<TechnoWorld.Models.Product.ProductCreateVM> ProductCreateVM { get; set; }
 

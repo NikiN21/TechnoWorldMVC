@@ -29,7 +29,7 @@ namespace TechnoWorld.Models.Product
         [Display(Name = "Price")]
         public decimal Price { get; set; }
         [Display(Name = "Quantity")]
-        public decimal Quantity { get; set; }
+        public int Quantity { get; set; }
 
         [Display(Name = "Discount")]
         public decimal Discount { get; set; }
