@@ -11,7 +11,11 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ProductId)
+                @Html.DisplayNameFor(model => model.ImageUrl)
+            </th>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.BrandName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.CustomerUsername)
@@ -27,20 +31,24 @@
     <tbody>
         @foreach (var item in Model)
         {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.ProductId)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.CustomerUsername)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.ProductCount)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.OrderedOn)
-    </td>
-</tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ImageUrl)
+            </td>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.BrandName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerUsername)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductCount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderedOn)
+            </td>
+        </tr>
 }
     </tbody>
 </table>

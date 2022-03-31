@@ -11,12 +11,18 @@ namespace TechnoWorld.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
         public DateTime OrderedOn { get; set; }
+        //public int BrandId { get; set; }
+        public string BrandName { get; set; }
+        public virtual Brand Brand { get; set; }
+
         public int ProductId { get; set; }
-       
         public virtual Product Product { get; set; }
         public string CustomerId { get; set; }
         public virtual ProductUser Customer { get; set; }
         public int ProductCount { get; set; }
+        public string ImageId { get; set; }
+        public string ImageUrl { get; set; }
+        public virtual Image Image { get; set; }
 
     }
 }

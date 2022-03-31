@@ -16,7 +16,9 @@ namespace TechnoWorld.Models.Order
         [Range(1, int.MaxValue)]
         [Display(Name = "Quantity")]
         public int ProductCount { get; set; }
-      
-       
+        public string BrandName { get; set; }
+
+
+
     }
 }
