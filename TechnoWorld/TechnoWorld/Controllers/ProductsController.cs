@@ -245,39 +245,7 @@ namespace TechnoWorld.Controllers
             }
             return this.View(products);
         }
-        [Authorize]
-        public IActionResult My(string searchString)
-        {
-            string currentUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var user = this.context.Users.SingleOrDefault(u => u.Id == currentUserId);
-            if (user == null)
-            {
-                return null;
-            }
-
-            List<OrderListingViewModel> orders = this.context.Orders
-                .Where(o => o.ProductUserId == user.Id)
-            .Select(o => new OrderListingViewModel
-            {
-                Id = o.Id,
-                ProductId = o.ProductId,
-                // ProductName o.Product.Name,
-                OrderedOn = o.OrderedOn.ToString("dd-mm-yyyy hh:mm", CultureInfo.InvariantCulture),
-           BrandName=o.BrandName,
-                BrandId=o.BrandId,
-
-                ProductUserId = o.ProductUserId,
-                //  ProductUserUsername = o.ProductUserUsername.UserName,
-                ProductCount = o.ProductCount
-            })
-            .ToList();
-
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                orders = orders.Where(o => o.BrandName.Contains(searchString)).ToList();
-            }
-            return this.View(orders);
-        }
+      
     }
 }
           

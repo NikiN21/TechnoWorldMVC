@@ -1,0 +1,47 @@
+﻿@model IEnumerable<TechnoWorld.Models.Order.OrderListingViewModel>
+
+@{ ViewData["Title"] = "My"; }
+
+<h1>My Orders</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerUsername)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductCount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderedOn)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.ProductId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CustomerUsername)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ProductCount)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.OrderedOn)
+    </td>
+</tr>
+}
+    </tbody>
+</table>
+

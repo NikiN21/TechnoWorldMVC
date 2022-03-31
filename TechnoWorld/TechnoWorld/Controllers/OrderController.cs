@@ -27,8 +27,8 @@ namespace TechnoWorld.Controllers
         {
             if (this.ModelState.IsValid)
             {
-                string currentUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-                var user = this.context.Users.SingleOrDefault(u => u.Id == currentUserId);
+                string userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var user = this.context.Users.SingleOrDefault(u => u.Id == userId);
                 var ev = this.context.Products.SingleOrDefault(e => e.Id == bindingModel.ProductId);
                 if (user == null || ev == null || ev.Quantity < bindingModel.ProductCount)
                 {
@@ -40,9 +40,9 @@ namespace TechnoWorld.Controllers
                     OrderedOn = DateTime.UtcNow,
                     ProductId = bindingModel.ProductId,
                     ProductCount = bindingModel.ProductCount,
-                    ProductUserId =currentUserId,
-                   
-                   
+                    CustomerId = userId
+
+
                 };
                 ev.Quantity -= bindingModel.ProductCount;
                 this.context.Products.Update(ev);
@@ -51,7 +51,55 @@ namespace TechnoWorld.Controllers
             }
             return this.RedirectToAction("All", "Products");
         }
-        
+        [Authorize(Roles = "Administrator")]
+        public IActionResult Index()
+        {
+            string userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = context.Users.SingleOrDefault(u => u.Id == userId);
+
+            List<OrderListingViewModel> orders = context
+                 .Orders
+                 .Select(x => new OrderListingViewModel
+                 {
+                     ProductId = x.ProductId,
+                     OrderedOn = x.OrderedOn.ToString("dd-mm-yyyy hh:mm", CultureInfo.InvariantCulture),
+                     CustomerUsername = x.Customer.UserName,
+                     ProductCount = x.ProductCount
+                 }).ToList();
+
+            return View(orders);
+        }
+        [Authorize]
+        public IActionResult My(string searchString)
+        {
+            string currentUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = this.context.Users.SingleOrDefault(u => u.Id == currentUserId);
+            if (user == null)
+            {
+                return null;
+            }
+
+            List<OrderListingViewModel> orders = this.context.Orders
+                .Where(x => x.CustomerId == user.Id)
+            .Select(x => new OrderListingViewModel
+            {
+                Id = x.Id,
+                ProductId = x.ProductId,
+
+                OrderedOn = x.OrderedOn.ToString("dd-mm-yyyy hh:mm", CultureInfo.InvariantCulture),
+                CustomerId = x.CustomerId,
+                CustomerUsername = x.Customer.UserName,
+                ProductCount = x.ProductCount
+            })
+            .ToList();
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                orders = orders.Where(o => o.Model.Contains(searchString)).ToList();
+            }
+            return this.View(orders);
+        }
+
     }
 }
 
