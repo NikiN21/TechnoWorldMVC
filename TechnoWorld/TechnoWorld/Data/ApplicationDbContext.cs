@@ -8,6 +8,7 @@ using TechnoWorld.Entities;
 using TechnoWorld.Models;
 using TechnoWorld.Models.Product;
 using TechnoWorld.Models.Brand;
+using TechnoWorld.Models.Order;
 
 namespace TechnoWorld.Data
 {
@@ -23,6 +24,7 @@ namespace TechnoWorld.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<TechnoWorld.Models.Order.OrderListingViewModel> OrderListingViewModel { get; set; }
 
 
 

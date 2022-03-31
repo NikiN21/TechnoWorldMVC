@@ -41,45 +41,48 @@ namespace TechnoWorld.Services
         public async Task Create(ProductCreateVM model, string imagePath)
         {
             var extension = Path.GetExtension(model.Image.FileName).TrimStart('.');
+
             var product = new Product
             {
-                CategoryId = model.CategoryId,
                 Model = model.Model,
+
+
                 BrandId = model.BrandId,
+                CategoryId = model.CategoryId,
+              
                 Price = model.Price,
                 Description = model.Description,
                 Quantity = model.Quantity,
                 Discount = model.Discount,
-
             };
-
-            //id се създава автоматично при създаване на обект
 
             var dbImage = new Image()
             {
                 Product = product,
                 Extension = extension
             };
+            //id се създава автоматично при създаване на обект
 
-            //връзваме снимката за кучето
+            product.ImageId = dbImage.Id; //връзваме снимката за кучето
 
-            product.ImageId = dbImage.Id;
-
-            //създаваме папката images, ако не съществува
             Directory.CreateDirectory($"{imagePath}/images/");
-            //правим физически запис на файла в папка images
-            var physicalPath = $"{ imagePath}/images/{dbImage.Id}.{ extension}";
+            //създаваме папката images, ако не съществува
+
+            var physicalPath = $"{imagePath}/images/{dbImage.Id}.{extension}";
             using Stream fileStream = new FileStream(physicalPath, FileMode.Create);
             await model.Image.CopyToAsync(fileStream);
-            //записваме данните за снимката
 
             await this._context.Images.AddAsync(dbImage);
+
             await this._context.Products.AddAsync(product);
             await this._context.SaveChangesAsync();
+
+
         }
 
         public Product GetProductById(int productId)
         {
+          
             return _context.Products.Find(productId);
         }
 
@@ -89,15 +92,16 @@ namespace TechnoWorld.Services
             List<Product> products = _context.Products.ToList();
             if (!String.IsNullOrEmpty(searchStringCategoryName) && !String.IsNullOrEmpty(searchStringBrandName))
             {
-                products = products.Where(d => d.CategoryName.Contains(searchStringCategoryName) && d.BrandName.Contains(searchStringBrandName)).ToList();
+                products = products.Where(d => d.Category.Name.Contains(searchStringCategoryName) && d.Brand
+                .Name.Contains(searchStringBrandName)).ToList();
             }
             else if (!String.IsNullOrEmpty(searchStringCategoryName))
             {
-                products = products.Where(d => d.CategoryName.Contains(searchStringCategoryName)).ToList();
+                products = products.Where(d => d.Category.Name.Contains(searchStringCategoryName)).ToList();
             }
             else if (!string.IsNullOrEmpty(searchStringBrandName))
             {
-                products = products.Where(d => d.BrandName.Contains(searchStringBrandName)).ToList();
+                products = products.Where(d => d.Brand.Name.Contains(searchStringBrandName)).ToList();
             }
             return products;
         }
@@ -173,6 +177,7 @@ namespace TechnoWorld.Services
 
        public List<ProductAllVM> GetProducts()
         {
+           
             List<ProductAllVM> products = _context.Products
                 .Select(d => new ProductAllVM
                 {

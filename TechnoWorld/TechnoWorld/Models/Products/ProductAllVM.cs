@@ -9,16 +9,19 @@ namespace TechnoWorld.Models.Product
     public class ProductAllVM
     {
         public int Id { get; set; }
-        [Display(Name = "Category")]
-        public int CategoryId { get; set; }
-        public string CategoryName { get; set; }
-        public string Category { get; set; }
-        public string Brand { get; set; }
-        [Display(Name = "Brand")]
-        public int BrandId { get; set; }
-        public string BrandName { get; set; }
         [Display(Name = "Model")]
         public string Model { get; set; }
+
+    //   [Display(Name = "Category")]
+        public int CategoryId { get; set; }
+      public string CategoryName { get; set; }
+        //public string Category { get; set; }
+        //public string Brand { get; set; }
+     //   [Display(Name = "Brand")]
+        public int BrandId { get; set; }
+     public string BrandName { get; set; }
+      
+       
 
         [Display(Name = "Description")]
         public string Description { get; set; }

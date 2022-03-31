@@ -4,19 +4,23 @@
 @{
     ViewData["Title"] = "All Products";
 }
+@using TechnoWorld.Models.Order
+
 
 <header style="background-image: url('https://alldonetechnology.com/wp-content/uploads/2020/06/pngtree-blue-minimalistic-tech-computer-banner-poster-background-image_178088.jpg') ">
     <div style="height: 7.5rem"></div>
 
     <div class="text-center my-5">
-        @*<img class="img-fluid rounded-circle mb-4" src="~/images/Logo.png" width="150" h alt="Logo" />*@
 
-        <h1 class="text-white" >Techno World</h1>
-        <h3 class="text-white"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16">
-    <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z" />
-</svg>Here are our Laptops!<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16">
-    <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z" />
-</svg></h3>
+
+        <h1 class="text-white">Techno World</h1>
+        <h3 class="text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z" />
+            </svg>Here are our Laptops!<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z" />
+            </svg>
+        </h3>
 
     </div>
 </header>
@@ -30,10 +34,11 @@
 @if ((this.User.Identity.IsAuthenticated) && (this.User.IsInRole("Administrator")))
 {
 
-<p><div class="text-center my-5">
-    <a asp-action="Create">Create New Product </a>
-</div>
-</p>
+    <p>
+        <div class="text-center my-5">
+            <a asp-action="Create">Create New Product </a>
+        </div>
+    </p>
 
 
 
@@ -49,10 +54,7 @@
                         <div class="media-body">
                             <h6 class="media-title font-weight-semibold"> <a>@Html.DisplayFor(modelItem => item.CategoryName)</a> </h6>
                             <h6 class="media-title font-weight-semibold">Model: <a>@Html.DisplayFor(modelItem => item.BrandName) @Html.DisplayFor(modelItem => item.Model)</a> </h6>
-                            @*<ul class="list-inline list-inline-dotted mb-3 mb-lg-2">
-                                    <li class="list-inline-item"><a href="#" class="text-muted" data-abc="true">Phones</a></li>
-                                    <li class="list-inline-item"><a href="#" class="text-muted" data-abc="true">Mobiles</a></li>
-                                </ul>*@
+                          
                             <p class="mb-3"> @Html.DisplayFor(modelItem => item.Description) </p>
                             <ul class="list-inline list-inline-dotted mb-0">
                                 <li class="list-inline-item">Quantity <a>@Html.DisplayFor(modelItem => item.Quantity)</a></li>
@@ -65,7 +67,21 @@
                                 <li class="list-inline-item">Discount <a> @Html.DisplayFor(modelItem => item.Discount) %</a></li>
                             </ul>
                             <div> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </div>
-                            <div class="text-muted"></div> <button style="background-color: dodgerblue" type="button" class="btn btn-warning mt-4 text-white"> Order</button>
+                            <div class="text-muted"></div>
+
+                            @*<button style="background-color: dodgerblue" type="button" class="btn btn-warning mt-4 text-white">
+                                <a asp-action="Create" asp-controller="Order" asp-route-id="@item.Id">
+                                    Order
+                                </a>
+                            </button>*@
+
+
+                            @await Html.PartialAsync("_OrderPartialView", new OrderCreateBindingModel
+                                        {
+                                            ProductId = item.Id
+                                        })
+
+
                             @if ((this.User.Identity.IsAuthenticated) && (this.User.IsInRole("Administrator")))
                             {
                                 <ul>
@@ -172,6 +188,8 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Discount)
                 </td>
+    <td>
+
 
                 @if ((this.User.Identity.IsAuthenticated) && (this.User.IsInRole("Administrator")))
 
