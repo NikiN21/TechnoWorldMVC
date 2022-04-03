@@ -11,10 +11,10 @@ namespace TechnoWorld.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
         public DateTime OrderedOn { get; set; }
-        //public int BrandId { get; set; }
-        public string BrandName { get; set; }
-        public virtual Brand Brand { get; set; }
-
+        public string BrandId { get; set; }
+        public virtual Brand BrandName { get; set; }
+     //   public string BrandName { get; set; }
+       // public virtual Brand Brand { get; set; }
         public int ProductId { get; set; }
         public virtual Product Product { get; set; }
         public string CustomerId { get; set; }

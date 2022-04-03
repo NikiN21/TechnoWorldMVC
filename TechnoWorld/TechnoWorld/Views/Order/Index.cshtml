@@ -14,20 +14,20 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ImageId)
+                Image
             </th>
        
             <th>
-                @Html.DisplayNameFor(model => model.BrandName)
+               Brand
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CustomerUsername)
+                User
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ProductCount)
+               Count
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.OrderedOn)
+               OrderedOn
             </th>
         </tr>
     </thead>
@@ -35,11 +35,12 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ImageId)
+                <img src="@item.ImageId" />
+                   
             </td>
            
             <td>
-                @Html.DisplayFor(modelItem => item.BrandName)
+                @Html.DisplayFor(modelItem => item.Brand)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CustomerUsername)

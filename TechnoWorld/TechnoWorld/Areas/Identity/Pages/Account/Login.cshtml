@@ -1,93 +1,149 @@
 ﻿@page
 @model LoginModel
 
-@{
-    ViewData["Title"] = "Log in";
-}
-<div class="text-sm-left"20px">
-    <h1>@ViewData["Title"]</h1>
-   
+<h1>@ViewData["Title"]</h1>
+<body>
+    <div>   </div>
+    <div class="text-center">
+    
 
-    <div class="col-md-4">
-        <section>
-            <form id="account" method="post">
+        <div class="container">
+            <div class="col-lg-10 col-xl-9 mx-auto">
+                <div class="card flex-row my-5 border-0 shadow rounded-3 overflow-hidden" style="background-image: linear-gradient(to left,#5298fd, #9ec5fe) " />
 
-                <hr />
-                <div asp-validation-summary="All" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Input.Username"></label>
-                    <input asp-for="Input.Username" class="form-control" />
-                    <span asp-validation-for="Input.Username" class="text-danger"></span>
+                <div class="card-img-left d-none d-md-flex">
                 </div>
-                <div class="form-group">
-                    <label asp-for="Input.Password"></label>
-                    <input asp-for="Input.Password" class="form-control" />
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>
-                </div>
-                @*<div class="form-group">
-                        <div class="checkbox">
-                            <label asp-for="Input.RememberMe">
-                                <input asp-for="Input.RememberMe" />
-                                @Html.DisplayNameFor(m => m.Input.RememberMe)
-                            </label>
+
+                <div class="card-footer">
+                    <h5 class="card-title text-center mb-5 fw-light fs-5" style="color:white">Log in</h5>
+                    <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+
+                        <div>
+                            <input asp-for="Input.Username" class="form-control" placeholder="Last Name" />
+                            <span asp-validation-for="Input.Username" class="text-danger"></span>
                         </div>
-                    </div>*@
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Log in</button>
+                        <div class="form-floating mb-3">
+
+                            <input asp-for="Input.Password" class="form-control" placeholder="Username" />
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+
+
+
+                        <a href="https://localhost:44341/ForUs/Info" class="d-block text-center mt-2 small" style="color:white">For us</a>
+                        <a href="https://localhost:44341/Identity/Account/Register" class="d-block text-center mt-2 small" style="color:white">Don't have an account? Register here</a>
+                        <a href="https://localhost:44341/Contacts" class="d-block text-center mt-2 small" style="color:white">if you have any login issues, contact us here</a>
+
+
+                        <button type="submit" class="btn btn-primary">Log in</button>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <p>
-                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
-                    </p>
-                    <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-                    </p>
-                    <p>
-                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
-                    </p>
-                    <p>
-                        <a asp-page="./Contacts" asp-route-returnUrl="@Model.ReturnUrl">Contact us</a>
-                    </p>
+                <div class="Image">
+                    <img src="~/images/RegisterPic.png" width="279" height="300" />
+                    <style>
+                        .Image {
+                            position:relative; 
+                                left:50px; top:-10px; width:40px; height:70px; 
+                        }
+                    </style>
+                </div>
+                <div class="col-md-6 col-md-offset-2">
 
                 </div>
-            </form>
-        </section>
-    </div>
+            </div>
+
+        
+
+
+        </div>
+
+      
     </div>
 
-    @*<div class="col-md-6 col-md-offset-2">
-            <section>
-                <h4>Use another service to log in.</h4>
-                <hr />
-                @{
-                    if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                    {
+</body>
+
+<!--div class="text-sm-left"20px">
+   <h1>ViewData["Title"]</h1>
+
+
+   <div class="col-md-4">
+       <section>
+           <form id="account" method="post">
+
+               <hr />
+               <div asp-validation-summary="All" class="text-danger"></div>
+               <div class="form-group">
+                   <label asp-for="Input.Username"></label>
+                   <input asp-for="Input.Username" class="form-control" />
+                   <span asp-validation-for="Input.Username" class="text-danger"></span>
+               </div>
+               <div class="form-group">
+                   <label asp-for="Input.Password"></label>
+                   <input asp-for="Input.Password" class="form-control" />
+                   <span asp-validation-for="Input.Password" class="text-danger"></span>
+               </div>-->
+@*<div class="form-group">
+        <div class="checkbox">
+            <label asp-for="Input.RememberMe">
+                <input asp-for="Input.RememberMe" />
+                @Html.DisplayNameFor(m => m.Input.RememberMe)
+            </label>
+        </div>
+    </div>*@
+<!--<div class="form-group">
+                <button type="submit" class="btn btn-primary">Log in</button>
+            </div>
+            <div class="form-group">
+                <p>
+                    <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                </p>
+                <p>
+                    <a asp-page="./Register" asp-route-returnUrl="Model.ReturnUrl">Register as a new user</a>
+                </p>
+                <p>
+                    <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+                </p>
+                <p>
+                    <a asp-page="./Contacts" asp-route-returnUrl="Model.ReturnUrl">Contact us</a>
+                </p>
+
+            </div>
+        </form>
+    </section>
+</div>
+</div>-->
+@*<div class="col-md-6 col-md-offset-2">
+        <section>
+            <h4>Use another service to log in.</h4>
+            <hr />
+            @{
+                if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                {
+                    <div>
+                        <p>
+                            There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
+                            for details on setting up this ASP.NET application to support logging in via external services.
+                        </p>
+                    </div>
+                }
+                else
+                {
+                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
                         <div>
                             <p>
-                                There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
-                                for details on setting up this ASP.NET application to support logging in via external services.
+                                @foreach (var provider in Model.ExternalLogins)
+                                {
+                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                }
                             </p>
                         </div>
-                    }
-                    else
-                    {
-                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                            <div>
-                                <p>
-                                    @foreach (var provider in Model.ExternalLogins)
-                                    {
-                                        <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                    }
-                                </p>
-                            </div>
-                        </form>
-                    }
+                    </form>
                 }
-            </section>
-        </div>*@
+            }
+        </section>
+    </div>*@
 
 
-    @section Scripts {
-        <partial name="_ValidationScriptsPartial" />
-    }
-
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

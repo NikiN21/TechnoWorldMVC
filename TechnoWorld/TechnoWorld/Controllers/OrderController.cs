@@ -61,9 +61,10 @@ namespace TechnoWorld.Controllers
                  .Orders
                  .Select(x => new OrderListingViewModel
                  {
-                     ImageId=x.ImageUrl,
-                     //BrandId = x.BrandId,
-                     BrandName = x.Brand.Name,
+                     Id = x.Id,
+                     ImageId =x.ImageUrl,
+                     BrandId = x.BrandId,
+                     Brand = x.BrandName.Name,
                      OrderedOn = x.OrderedOn.ToString("dd-mm-yyyy hh:mm", CultureInfo.InvariantCulture),
                      CustomerUsername = x.Customer.UserName,
                      ProductCount = x.ProductCount
@@ -86,8 +87,8 @@ namespace TechnoWorld.Controllers
             .Select(x => new OrderListingViewModel
             {
                 Id = x.Id,
-                //BrandId = x.BrandId,
-                BrandName = x.Brand.Name,
+                BrandId = x.BrandId,
+                Brand= x.BrandName.Name,
                 ImageUrl = x.ImageId,
                 OrderedOn = x.OrderedOn.ToString("dd-mm-yyyy hh:mm", CultureInfo.InvariantCulture),
                 CustomerId = x.CustomerId,
