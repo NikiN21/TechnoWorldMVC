@@ -14,7 +14,7 @@ namespace TechnoWorld.Models.Order
         public string OrderedOn { get; set; }
         public int ProductId { get; set; }
         [Display(Name = "Brand")]
-        public string BrandId { get; set; }
+        public int BrandId { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }
         public string CustomerId { get; set; }

@@ -30,6 +30,7 @@ namespace TechnoWorld.Controllers
                 string userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
                 var user = this.context.Users.SingleOrDefault(u => u.Id == userId);
                 var ev = this.context.Products.SingleOrDefault(e => e.Id == bindingModel.ProductId);
+
                 if (user == null || ev == null || ev.Quantity < bindingModel.ProductCount)
                 {
 
@@ -39,11 +40,13 @@ namespace TechnoWorld.Controllers
                 {
                     OrderedOn = DateTime.UtcNow,
                     ProductId = bindingModel.ProductId,
-                    ProductCount = bindingModel.ProductCount,
-                    CustomerId = userId
-
-
+                    Count = bindingModel.ProductCount,
+                    CustomerId = userId,
+                    BrandId = ev.BrandId,
+                    ImageId = ev.ImageId,
+                    ImageUrl = $"/images/{ev.ImageId}.{ev.Image.Extension}"
                 };
+                
                 ev.Quantity -= bindingModel.ProductCount;
                 this.context.Products.Update(ev);
                 this.context.Orders.Add(orderForDb);
@@ -62,12 +65,13 @@ namespace TechnoWorld.Controllers
                  .Select(x => new OrderListingViewModel
                  {
                      Id = x.Id,
-                     ImageId =x.ImageUrl,
+                     ImageId =x.ImageId,
                      BrandId = x.BrandId,
-                     Brand = x.BrandName.Name,
+                     Brand = x.Brand.Name,
                      OrderedOn = x.OrderedOn.ToString("dd-mm-yyyy hh:mm", CultureInfo.InvariantCulture),
                      CustomerUsername = x.Customer.UserName,
-                     ProductCount = x.ProductCount
+                     ProductCount = x.Count,
+                     ImageUrl = x.ImageUrl
                  }).ToList();
 
             return View(orders);
@@ -88,12 +92,12 @@ namespace TechnoWorld.Controllers
             {
                 Id = x.Id,
                 BrandId = x.BrandId,
-                Brand= x.BrandName.Name,
-                ImageUrl = x.ImageId,
+                Brand= x.Brand.Name,
                 OrderedOn = x.OrderedOn.ToString("dd-mm-yyyy hh:mm", CultureInfo.InvariantCulture),
                 CustomerId = x.CustomerId,
                 CustomerUsername = x.Customer.UserName,
-                ProductCount = x.ProductCount
+                ProductCount = x.Count,
+                ImageUrl = x.ImageUrl
             })
             .ToList();
 

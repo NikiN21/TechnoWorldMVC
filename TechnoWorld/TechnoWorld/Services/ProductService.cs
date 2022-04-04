@@ -58,7 +58,7 @@ namespace TechnoWorld.Services
 
             var dbImage = new Image()
             {
-                Product = product,
+                Products = product,
                 Extension = extension
             };
             //id се създава автоматично при създаване на обект

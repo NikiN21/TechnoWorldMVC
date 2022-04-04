@@ -13,17 +13,10 @@ namespace TechnoWorld.Entities
         {
             this.Id = Guid.NewGuid().ToString();
         }
-        [Key]
-
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
-        [Required]
-        [ForeignKey("Product")]
-
-        public int ProductId { get; set; }
-
-        public virtual Product Product { get; set; }
-
         public string Extension { get; set; }
+        public virtual Product Products { get; set; }
     }
 }
 
