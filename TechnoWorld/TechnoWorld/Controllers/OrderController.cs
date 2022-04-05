@@ -44,7 +44,8 @@ namespace TechnoWorld.Controllers
                     CustomerId = userId,
                     BrandId = ev.BrandId,
                     ImageId = ev.ImageId,
-                    ImageUrl = $"/images/{ev.ImageId}.{ev.Image.Extension}"
+                    ImageUrl = $"/images/{ev.ImageId}.{ev.Image.Extension}",
+                    Model=ev.Model
                 };
                 
                 ev.Quantity -= bindingModel.ProductCount;
@@ -71,7 +72,8 @@ namespace TechnoWorld.Controllers
                      OrderedOn = x.OrderedOn.ToString("dd-mm-yyyy hh:mm", CultureInfo.InvariantCulture),
                      CustomerUsername = x.Customer.UserName,
                      ProductCount = x.Count,
-                     ImageUrl = x.ImageUrl
+                     ImageUrl = x.ImageUrl,
+                     Model = x.Model
                  }).ToList();
 
             return View(orders);
@@ -97,7 +99,8 @@ namespace TechnoWorld.Controllers
                 CustomerId = x.CustomerId,
                 CustomerUsername = x.Customer.UserName,
                 ProductCount = x.Count,
-                ImageUrl = x.ImageUrl
+                ImageUrl = x.ImageUrl,
+                Model = x.Model
             })
             .ToList();
 

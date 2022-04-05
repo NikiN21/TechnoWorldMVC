@@ -24,6 +24,7 @@ namespace TechnoWorld.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<TechnoWorld.Models.Product.ProductAllVM> ProductAllVM { get; set; }
 
 
 

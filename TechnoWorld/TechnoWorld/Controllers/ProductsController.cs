@@ -164,6 +164,21 @@ namespace TechnoWorld.Controllers
                 Quantity = item.Quantity,
                 Discount = item.Discount
             };
+            product.Brands = _brandService.GetBrands()
+               .Select(b => new BrandChoiceVM()
+               {
+                   Id = b.Id,
+                   Name = b.Name
+               })
+               .ToList();
+
+            product.Categories = _categoryService.GetCategories()
+               .Select(c => new CategoryChoiceVM()
+               {
+                   Id = c.Id,
+                   Name = c.Name
+               })
+               .ToList();
             return View(product);
         }
 
@@ -178,6 +193,9 @@ namespace TechnoWorld.Controllers
                     return this.RedirectToAction("All");
                 }
             }
+            
+           
+           
             return View(bindingModel);
         }
 
@@ -245,7 +263,30 @@ namespace TechnoWorld.Controllers
             }
             return this.View(products);
         }
-      
+        public IActionResult Laptop()
+        {
+            var products = _productService.GetProducts().Where(x => x.CategoryName == "Laptop").ToList();
+         
+          
+            return this.View(products);
+        }
+        public IActionResult Monitor()
+        {
+            var products = _productService.GetProducts().Where(x => x.CategoryName == "Monitor").ToList();
+
+
+            return this.View(products);
+        }
+        public IActionResult Accessory()
+        {
+            var products = _productService.GetProducts().Where(x => x.CategoryName == "Accessory").ToList();
+
+
+            return this.View(products);
+        }
+
+
+
     }
 }
           

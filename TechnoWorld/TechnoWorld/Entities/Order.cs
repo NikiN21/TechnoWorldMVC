@@ -24,5 +24,6 @@ namespace TechnoWorld.Entities
         public string ImageId { get; set; }
         public virtual Image Image { get; set; }
         public string ImageUrl { get; set; }
+        public string Model { get; set; }
     }
 }

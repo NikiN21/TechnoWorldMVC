@@ -16,6 +16,7 @@ namespace TechnoWorld.Abstractions
         bool UpdateProduct(int productId, int categoryId,int brandId, string model,   string description,  decimal price, int quantity, decimal discount);
 
        List<ProductAllVM> GetProducts();
+        
         //List<ProductAllVM> GetAccessories();
 
         Product GetProductById(int productId);
