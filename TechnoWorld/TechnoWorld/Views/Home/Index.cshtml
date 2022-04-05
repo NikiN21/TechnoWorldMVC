@@ -1,66 +1,293 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@*https://www.w3schools.com/w3css/tryit.asp?filename=tryw3css_slideshow_dots2*@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+    .mySlides {
+        display: none
+    }
+
+    .w3-left, .w3-right, .w3-badge {
+        cursor: pointer;
+        color:black;
+        width:30px;
+
+        
+            
+    }
+
+    .w3-badge {
+        height: 13px;
+        width: 13px;
+        padding: 0
+    }
 
 
+    .dot {
+        height: 20px;
+        width: 20px;
+        margin: 0 2px;
+        background-color: #000000;
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.6s ease;
+    }
+    
+   
+
+
+</style>
 
 <body>
 
-    <header style="background-image: url('https://alldonetechnology.com/wp-content/uploads/2020/06/pngtree-blue-minimalistic-tech-computer-banner-poster-background-image_178088.jpg') ">
+  
 
-        <div class="text-center my-5">
-            <img class="img-fluid rounded-circle mb-4" src="~/images/Logo.png" width="150" h alt="Logo" />
-
-            <h1 class="text-white ">Techno World</h1>
-            <h3 class="text-white">Welcom to our website!</h3>
-
+    <div class="w3-content w3-display-container" style="max-width:2000px">
+        <a asp-controller="Products" asp-action="AllDiscounts" class="some-paragraph btn btn-outline-light">Promotions</a>
+        <a href="https://localhost:44341/Products/Laptop">
+            <img class="mySlides" w3-animate-fading" src="~/images/SlideShow1.jpg" style="width:100%" />
+        </a>
+        <a href="https://localhost:44341/Products/TV">
+            <img class="mySlides" w3-animate-fading" src="~/images/SlideShow2.jpg" style="width:100%"  />
+        </a>
+        <a href="https://localhost:44341/Products/MobilePhone">
+            <img class="mySlides" w3-animate-fading" src="~/images/SlideShow3.jpg" style="width:100%"  />
+        </a>
+        @*<a href="https://localhost:44341/Products/Computer">
+            <img class="mySlides" w3-animate-fading" src="~/images/SlideShow4.jpg" style="width:120%"  />
+        </a>*@
+        <div class="w3-center w3-container w3-section w3-large w3-text-white w3-display-bottommiddle" style="width:100%">
+            <div class="w3-left w3-hover-text-khaki" onclick="plusDivs(-1)">&#10094;</div>
+            <div class="w3-right w3-hover-text-khaki" onclick="plusDivs(1)">&#10095;</div>
+            <span class="w3-badge  demo w3-border w3-section " onclick="currentDiv(1)"></span>
+            <span class="w3-badge demo w3-border w3-section " onclick="currentDiv(2)"></span>
+            <span class="w3-badge demo w3-border w3-section " onclick="currentDiv(3)"></span>
+            @*<span class="w3-badge demo w3-border w3-section " onclick="currentDiv(4)"></span>*@
         </div>
-    </header>
-
-    <div class="text-center">
-        <a href="https://localhost:44341/Products/All">
-
-            <div class="col-3 d-inline-block">
-                <img src="/images/LaptopLenovo.png" width="200" />
-                <p class="font-weight-bolder">Laptops</p>
-            </div>
-        </a>
-        <a href="https://localhost:44341/Products/All">
-            <div class="col-3 d-inline-block">
-                <img src="/images/LenovoEarphones.png" width="200" />
-                <p class="font-weight-bolder">Accessories</p>
-            </div>
-        </a>
-        <a href="https://localhost:44341/Products/All">
-            <div class="col-3 d-inline-block">
-                <img src="/images/SamsungMonitor.png" width="200" />
-                <p class="font-weight-bolder">Monitors</p>
-            </div>
-        </a>
     </div>
 
-    <div style="background-image: url('https://www.htmlcsscolor.com/preview/gallery/0496FF.png') ">
+    <script>
+        var slideIndex = 1;
+        showDivs(slideIndex);
 
-    </div>
+        function plusDivs(n) {
+            showDivs(slideIndex += n);
+        }
 
-    <section class="py-5">
-        <div class="container my-5">
-            <div class="row justify-content-center">
-                <div class="col-lg-6">
-                    <h2>Добре дошли в Techno World!</h2>
-                    <h2 class="lead">Тук ще намерите точно това от което имате нужда. Предлагаме разнообразние от лаптопи, монитори и аксесоари, също така не забравяйте да разгледате нашите промоционални оферти.</h2>
+        function currentDiv(n) {
+            showDivs(slideIndex = n);
+        }
 
-                </div>
-            </div>
-        </div>
-    </section>
+        function showDivs(n) {
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            var dots = document.getElementsByClassName("demo");
+            if (n > x.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = x.length }
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" w3-white", "");
+            }
+            x[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " w3-white";
+            setTimeout(mySlides, 2000);
 
-    <div style="background-image: url('https://alldonetechnology.com/wp-content/uploads/2020/06/pngtree-blue-minimalistic-tech-computer-banner-poster-background-image_178088.jpg') ">
+        }
+    </script>
+    @*<script>
+            let slideIndex = 0;
+            showSlides();
 
-        <div style="height: 2rem"></div>
-
-
-    </div>
-
+            function showSlides() {
+                let i;
+                let slides = document.getElementsByClassName("mySlides");
+                let dots = document.getElementsByClassName("dot");
+                for (i = 0; i < slides.length; i++) {
+                    slides[i].style.display = "none";
+                }
+                slideIndex++;
+                if (slideIndex > slides.length) { slideIndex = 1 }
+                for (i = 0; i < dots.length; i++) {
+                    dots[i].className = dots[i].className.replace(" active", "");
+                }
+                slides[slideIndex - 1].style.display = "block";
+                dots[slideIndex - 1].className += " active";
+                setTimeout(showSlides, 2000); // Change image every 2 seconds
+            }
+        </script>*@
 
 </body>
+</html>
+@*<body>
+        <div class="w3-content w3-display-container">
+            <img class="mySlides" src="~/images/SlideShow1.jpg" style="width:100%" />
+            <img class="mySlides" src="~/images/SlideShow2.jpg" style="width:100%" />
+            <img class="mySlides" src="~/images/SlideShow3.jpg" style="width:100%" />
+            <div class="w3-center w3-display-bottommiddle" style="width:100%">
+                <div class="w3-left" onclick="plusDivs(-1)">&#10094;</div>
+                <div class="w3-right" onclick="plusDivs(1)">&#10095;</div>
+                <span class="w3-badge demo w3-border" onclick="currentDiv(1)"></span>
+                <span class="w3-badge demo w3-border" onclick="currentDiv(2)"></span>
+                <span class="w3-badge demo w3-border" onclick="currentDiv(3)"></span>
+            </div>
+        </div>
+
+
+
+    </body>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+       <style>
+           .dot {
+               height: 15px;
+               width: 15px;
+               margin: 0 2px;
+               background-color: #bbb;
+               border-radius: 50%;
+               display: inline-block;
+               transition: background-color 0.6s ease;
+           }
+           .active {
+               background-color: #717171;
+           }
+
+       </style>*@
+
+@*<body>
+        <div class="slideshow-container">
+            <div class="mySlides fade">
+                <img src="~/images/SlideShow1.jpg" style="width:100%">
+            </div>
+            <div class="mySlides fade">
+                <img src="~/images/SlideShow2.jpg" style="width:100%">
+            </div>
+            <div class="mySlides fade">
+                <img src="~/images/SlideShow3.jpg" style="width:100%">
+            </div>
+        <br>
+        <div style="text-align:center">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+
+        <script>
+            let slideIndex = 0;
+            showSlides();
+
+            function showSlides() {
+                let i;
+                let slides = document.getElementsByClassName("mySlides");
+                let dots = document.getElementsByClassName("dot");
+                for (i = 0; i < slides.length; i++) {
+                    slides[i].style.display = "none";
+                }
+                slideIndex++;
+                if (slideIndex > slides.length) { slideIndex = 1 }
+                for (i = 0; i < dots.length; i++) {
+                    dots[i].className = dots[i].className.replace(" active", "");
+                }
+                slides[slideIndex - 1].style.display = "block";
+                dots[slideIndex - 1].className += " active";
+                setTimeout(showSlides, 2000); // Change image every 2 seconds
+            }
+        </script>
+
+    </body>*@
+
+
+
+@*<body>
+
+        <header style="background-image: url('https://alldonetechnology.com/wp-content/uploads/2020/06/pngtree-blue-minimalistic-tech-computer-banner-poster-background-image_178088.jpg') ">
+
+            <div class="text-center my-5">
+                <img class="img-fluid rounded-circle mb-4" src="~/images/Logo.png" width="150" h alt="Logo" />
+
+                <h1 class="text-white ">Techno World</h1>
+                <h3 class="text-white">Welcom to our website!</h3>
+
+            </div>
+        </header>
+
+        <div class="text-center">
+            <a href="https://localhost:44341/Products/Laptop">
+
+                <div class="col-3 d-inline-block">
+                    <img src="/images/LaptopLenovo.png" width="100" />
+                    <p class="font-weight-bolder">Laptops</p>
+                </div>
+            </a>
+            <a href="https://localhost:44341/Products/Accessory">
+                <div class="col-3 d-inline-block">
+                    <img src="/images/LenovoEarphones.png" width="100" />
+                    <p class="font-weight-bolder">Accessories</p>
+                </div>
+            </a>
+            <a href="https://localhost:44341/Products/Monitor">
+                <div class="col-3 d-inline-block">
+                    <img src="/images/SamsungMonitor.png" width="100" />
+                    <p class="font-weight-bolder">Monitors</p>
+                </div>
+            </a>
+            <a href="https://localhost:44341/Products/Computer">
+
+                <div class="col-3 d-inline-block">
+                    <img src="/images/ComputerAsus.jpg" width="100" />
+                    <p class="font-weight-bolder">Computers</p>
+                </div>
+            </a>
+            <a href="https://localhost:44341/Products/TV">
+
+                <div class="col-3 d-inline-block">
+                    <img src="/images/TVLG.jpg" width="100" />
+                    <p class="font-weight-bolder">TV-s</p>
+                </div>
+            </a>
+            <a href="https://localhost:44341/Products/MobilePhone">
+
+                <div class="col-3 d-inline-block">
+                    <img src="/images/MobilePhone.jpg" width="100" />
+                    <p class="font-weight-bolder">MobilePhones</p>
+                </div>
+            </a>
+            <a href="https://localhost:44341/Products/SmartWatch">
+
+                <div class="col-3 d-inline-block">
+                    <img src="/images/SmartWatch.jpg" width="100" />
+                    <p class="font-weight-bolder">SmartWatch</p>
+                </div>
+            </a>
+        </div>
+
+                <div style="background-image: url('https://www.htmlcsscolor.com/preview/gallery/0496FF.png') ">
+
+                </div>
+
+                <section class="py-5">
+                    <div class="container my-5">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-6">
+                                <h2>Добре дошли в Techno World!</h2>
+                                <h2 class="lead">Тук ще намерите точно това от което имате нужда. Предлагаме разнообразние от лаптопи, монитори и аксесоари, също така не забравяйте да разгледате нашите промоционални оферти.</h2>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div style="background-image: url('https://alldonetechnology.com/wp-content/uploads/2020/06/pngtree-blue-minimalistic-tech-computer-banner-poster-background-image_178088.jpg') ">
+
+                    <div style="height: 2rem"></div>
+
+
+                </div>
+
+
+    </body>*@
+
+

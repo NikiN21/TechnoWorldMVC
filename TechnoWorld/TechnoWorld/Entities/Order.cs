@@ -25,5 +25,8 @@ namespace TechnoWorld.Entities
         public virtual Image Image { get; set; }
         public string ImageUrl { get; set; }
         public string Model { get; set; }
+        public decimal Price { get; set; }
+        //public decimal MaxPrice { get; set; }
+
     }
 }

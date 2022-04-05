@@ -14,6 +14,7 @@ using TechnoWorld.Entities;
 using TechnoWorld.Models.Brand;
 using TechnoWorld.Models.Order;
 using TechnoWorld.Models.Product;
+using TechnoWorld.Models.Products;
 
 namespace TechnoWorld.Controllers
 
@@ -280,17 +281,87 @@ namespace TechnoWorld.Controllers
         public IActionResult Accessory()
         {
             var products = _productService.GetProducts().Where(x => x.CategoryName == "Accessory").ToList();
-
-
             return this.View(products);
         }
+        public IActionResult Promotion()
+        {
+            var products = _productService.GetProducts().Where(x => x.Discount > 0).ToList();
+            return this.View(products);
+        }
+        public IActionResult Computer()
+        {
+            var products = _productService.GetProducts().Where(x => x.CategoryName == "Computer").ToList();
+            return this.View(products);
+        }
+        public IActionResult TV()
+        {
+            var products = _productService.GetProducts().Where(x => x.CategoryName == "TV").ToList();
+            return this.View(products);
+        }
+        public IActionResult MobilePhone()
+        {
+            var products = _productService.GetProducts().Where(x => x.CategoryName == "Mobile phone").ToList();
+            return this.View(products);
+        }
+        public IActionResult SmartWatch()
+        {
+            var products = _productService.GetProducts().Where(x => x.CategoryName == "Smart watch").ToList();
+            return this.View(products);
+        }
+        public IActionResult MakeDiscount(int id)
+        {
+            var x = _productService.GetProductById(id);
 
+            ProductPromotionViewModel product = new ProductPromotionViewModel
+            {
+                Id = x.Id,
+                Model = x.Model,
+                BrandId = x.BrandId,
+                OldPrice = x.Price,
+                NewPrice = x.Price,
+                ImageUrl = x.ImageId
+            };
+            return View(product);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult MakeDiscount(int id, decimal discount)
+        {
+            _productService.MakeDiscount(id, discount);
 
+            return this.RedirectToAction("All");
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult RemoveDiscount(int id, int discount)
+        {
+            _productService.RemoveDiscount(id);
 
+            return this.RedirectToAction("All");
+        }
+        public IActionResult AllDiscounts()
+        {
+            var products = new List<ProductAllVM>();
+
+            foreach (var product in _productService.GetProducts().Where(x => x.Discount != 0))
+            {
+                var viewModel = new ProductAllVM
+                {
+                    Id = product.Id,
+                    ImageUrl = product.ImageUrl,
+                    CategoryId = product.CategoryId,
+                    BrandId = product.BrandId,
+                    Description = product.Description,
+                    Quantity = product.Quantity,
+                    Price = product.Price,
+                    Discount = product.Discount
+                };
+                products.Add(viewModel);
+            }
+            return View("All", products);
+        }
     }
 }
-          
-       
 
 
 

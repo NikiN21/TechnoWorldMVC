@@ -23,5 +23,7 @@ namespace TechnoWorld.Models.Order
         public int ProductCount { get; set; }
         public string ImageId { get; set; }
         public string ImageUrl { get; set; }
+        public decimal Price { get; set; }
+     //  public string TotalPrice { get; set; }
     }
 }

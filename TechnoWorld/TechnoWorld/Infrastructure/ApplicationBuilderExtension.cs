@@ -41,8 +41,12 @@ namespace TechnoWorld.Infrastructure
             dataCategory.Categories.AddRange(new[]
             {
                 new Category {Name="Laptop"},
+                new Category {Name="Computer"},
                 new Category {Name="Monitor"},
                 new Category {Name="Accessory"},
+                 new Category {Name="TV"},
+                new Category {Name="Mobile phone"},
+                new Category {Name="Smart watch"}
 
             });
             dataCategory.SaveChanges();

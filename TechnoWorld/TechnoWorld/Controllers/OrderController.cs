@@ -45,7 +45,9 @@ namespace TechnoWorld.Controllers
                     BrandId = ev.BrandId,
                     ImageId = ev.ImageId,
                     ImageUrl = $"/images/{ev.ImageId}.{ev.Image.Extension}",
-                    Model=ev.Model
+                    Model=ev.Model,
+                    Price=ev.Price,
+                   // TotalPrice = (ev.Quantity * ev.MaxPrice).ToString()
                 };
                 
                 ev.Quantity -= bindingModel.ProductCount;
@@ -73,7 +75,9 @@ namespace TechnoWorld.Controllers
                      CustomerUsername = x.Customer.UserName,
                      ProductCount = x.Count,
                      ImageUrl = x.ImageUrl,
-                     Model = x.Model
+                     Model = x.Model,
+                     Price = x.Price,
+                    // TotalPrice = (x.Count * x.MaxPrice).ToString()
                  }).ToList();
 
             return View(orders);
@@ -100,7 +104,9 @@ namespace TechnoWorld.Controllers
                 CustomerUsername = x.Customer.UserName,
                 ProductCount = x.Count,
                 ImageUrl = x.ImageUrl,
-                Model = x.Model
+                Model = x.Model,
+                Price = x.Price,
+               // TotalPrice = (x.Count * x.MaxPrice).ToString()
             })
             .ToList();
 
