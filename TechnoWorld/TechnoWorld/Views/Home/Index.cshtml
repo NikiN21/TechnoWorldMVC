@@ -12,11 +12,8 @@
 
     .w3-left, .w3-right, .w3-badge {
         cursor: pointer;
-        color:black;
-        width:30px;
-
-        
-            
+        color: black;
+        width: 30px;
     }
 
     .w3-badge {
@@ -35,93 +32,90 @@
         display: inline-block;
         transition: background-color 0.6s ease;
     }
-    
-   
-
-
 </style>
 
-<body>
+    <body>
 
-  
 
-    <div class="w3-content w3-display-container" style="max-width:2000px">
-        <a asp-controller="Products" asp-action="AllDiscounts" class="some-paragraph btn btn-outline-light">Promotions</a>
-        <a href="https://localhost:44341/Products/Laptop">
-            <img class="mySlides" w3-animate-fading" src="~/images/SlideShow1.jpg" style="width:100%" />
-        </a>
-        <a href="https://localhost:44341/Products/TV">
-            <img class="mySlides" w3-animate-fading" src="~/images/SlideShow2.jpg" style="width:100%"  />
-        </a>
-        <a href="https://localhost:44341/Products/MobilePhone">
-            <img class="mySlides" w3-animate-fading" src="~/images/SlideShow3.jpg" style="width:100%"  />
-        </a>
-        @*<a href="https://localhost:44341/Products/Computer">
-            <img class="mySlides" w3-animate-fading" src="~/images/SlideShow4.jpg" style="width:120%"  />
-        </a>*@
-        <div class="w3-center w3-container w3-section w3-large w3-text-white w3-display-bottommiddle" style="width:100%">
-            <div class="w3-left w3-hover-text-khaki" onclick="plusDivs(-1)">&#10094;</div>
-            <div class="w3-right w3-hover-text-khaki" onclick="plusDivs(1)">&#10095;</div>
-            <span class="w3-badge  demo w3-border w3-section " onclick="currentDiv(1)"></span>
-            <span class="w3-badge demo w3-border w3-section " onclick="currentDiv(2)"></span>
-            <span class="w3-badge demo w3-border w3-section " onclick="currentDiv(3)"></span>
-            @*<span class="w3-badge demo w3-border w3-section " onclick="currentDiv(4)"></span>*@
+
+        <div class="w3-content w3-display-container" style="max-width:2000px">
+            <a asp-controller="Products" asp-action="AllDiscounts" class="some-paragraph btn btn-outline-light">Promotions</a>
+            <a href="https://localhost:44341/Products/Laptop">
+                <img class="mySlides" w3-animate-fading" src="~/images/SlideShow1.jpg" style="width:100%" />
+            </a>
+            <a href="https://localhost:44341/Products/TV">
+                <img class="mySlides" w3-animate-fading" src="~/images/SlideShow2.jpg" style="width:100%" />
+            </a>
+            <a href="https://localhost:44341/Products/MobilePhone">
+                <img class="mySlides" w3-animate-fading" src="~/images/SlideShow3.jpg" style="width:100%" />
+            </a>
+            @*<a href="https://localhost:44341/Products/Computer">
+                    <img class="mySlides" w3-animate-fading" src="~/images/SlideShow4.jpg" style="width:120%"  />
+                </a>*@
+            <div class="w3-center w3-container w3-section w3-large w3-text-white w3-display-bottommiddle" style="width:100%">
+                <div class="w3-left w3-hover-text-khaki" onclick="plusDivs(-1)">&#10094;</div>
+                <div class="w3-right w3-hover-text-khaki" onclick="plusDivs(1)">&#10095;</div>
+                <span class="w3-badge  demo w3-border w3-section " onclick="currentDiv(1)"></span>
+                <span class="w3-badge demo w3-border w3-section " onclick="currentDiv(2)"></span>
+                <span class="w3-badge demo w3-border w3-section " onclick="currentDiv(3)"></span>
+                @*<span class="w3-badge demo w3-border w3-section " onclick="currentDiv(4)"></span>*@
+            </div>
         </div>
-    </div>
 
-    <script>
-        var slideIndex = 1;
-        showDivs(slideIndex);
+        <script>
+            var slideIndex = 1;
+            showDivs(slideIndex);
 
-        function plusDivs(n) {
-            showDivs(slideIndex += n);
-        }
-
-        function currentDiv(n) {
-            showDivs(slideIndex = n);
-        }
-
-        function showDivs(n) {
-            var i;
-            var x = document.getElementsByClassName("mySlides");
-            var dots = document.getElementsByClassName("demo");
-            if (n > x.length) { slideIndex = 1 }
-            if (n < 1) { slideIndex = x.length }
-            for (i = 0; i < x.length; i++) {
-                x[i].style.display = "none";
+            function plusDivs(n) {
+                showDivs(slideIndex += n);
             }
-            for (i = 0; i < dots.length; i++) {
-                dots[i].className = dots[i].className.replace(" w3-white", "");
+
+            function currentDiv(n) {
+                showDivs(slideIndex = n);
             }
-            x[slideIndex - 1].style.display = "block";
-            dots[slideIndex - 1].className += " w3-white";
-            setTimeout(mySlides, 2000);
 
-        }
-    </script>
-    @*<script>
-            let slideIndex = 0;
-            showSlides();
-
-            function showSlides() {
-                let i;
-                let slides = document.getElementsByClassName("mySlides");
-                let dots = document.getElementsByClassName("dot");
-                for (i = 0; i < slides.length; i++) {
-                    slides[i].style.display = "none";
+            function showDivs(n) {
+                var i;
+                var x = document.getElementsByClassName("mySlides");
+                var dots = document.getElementsByClassName("demo");
+                if (n > x.length) { slideIndex = 1 }
+                if (n < 1) { slideIndex = x.length }
+                for (i = 0; i < x.length; i++) {
+                    x[i].style.display = "none";
                 }
-                slideIndex++;
-                if (slideIndex > slides.length) { slideIndex = 1 }
                 for (i = 0; i < dots.length; i++) {
-                    dots[i].className = dots[i].className.replace(" active", "");
+                    dots[i].className = dots[i].className.replace(" w3-white", "");
                 }
-                slides[slideIndex - 1].style.display = "block";
-                dots[slideIndex - 1].className += " active";
-                setTimeout(showSlides, 2000); // Change image every 2 seconds
-            }
-        </script>*@
+                x[slideIndex - 1].style.display = "block";
+                dots[slideIndex - 1].className += " w3-white";
+                setTimeout(mySlides, 2000);
 
-</body>
+            }
+        </script>
+        @*<script>
+                let slideIndex = 0;
+                showSlides();
+
+                function showSlides() {
+                    let i;
+                    let slides = document.getElementsByClassName("mySlides");
+                    let dots = document.getElementsByClassName("dot");
+                    for (i = 0; i < slides.length; i++) {
+                        slides[i].style.display = "none";
+                    }
+                    slideIndex++;
+                    if (slideIndex > slides.length) { slideIndex = 1 }
+                    for (i = 0; i < dots.length; i++) {
+                        dots[i].className = dots[i].className.replace(" active", "");
+                    }
+                    slides[slideIndex - 1].style.display = "block";
+                    dots[slideIndex - 1].className += " active";
+                    setTimeout(showSlides, 2000); // Change image every 2 seconds
+                }
+            </script>*@
+
+    </body>
+
 </html>
 @*<body>
         <div class="w3-content w3-display-container">

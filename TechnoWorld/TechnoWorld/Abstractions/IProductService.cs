@@ -18,7 +18,9 @@ namespace TechnoWorld.Abstractions
         List<Product> GetProducts(string searchStringCategoryName, string searchStringBrandName);
         public bool MakeDiscount(int id, decimal discount);
         public bool RemoveDiscount(int id);
-
+        int countProducts();
+        int countUsers();
+        int countOrders();
 
     }
 }

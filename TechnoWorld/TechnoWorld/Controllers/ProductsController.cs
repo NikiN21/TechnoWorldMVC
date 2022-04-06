@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using TechnoWorld.Abstractions;
 using TechnoWorld.Data;
 using TechnoWorld.Entities;
+using TechnoWorld.Models;
 using TechnoWorld.Models.Brand;
 using TechnoWorld.Models.Order;
 using TechnoWorld.Models.Product;
@@ -359,6 +360,15 @@ namespace TechnoWorld.Controllers
                 products.Add(viewModel);
             }
             return View("All", products);
+        }
+        public IActionResult Statistic()
+        {
+            StatisticVM statistic = new StatisticVM();
+
+            statistic.countProducts = _productService.countProducts();
+            statistic.countUsers = _productService.countUsers();
+            statistic.countOrders = _productService.countOrders();
+            return View(statistic);
         }
     }
 }

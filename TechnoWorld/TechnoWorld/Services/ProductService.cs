@@ -192,6 +192,21 @@ namespace TechnoWorld.Services
 
             return _context.SaveChanges() != 0;
         }
+
+        public int countProducts()
+        {
+            return _context.Products.Count();
+        }
+
+        public int countUsers()
+        {
+            return _context.Users.Count();
+        }
+
+        public int countOrders()
+        {
+            return _context.Orders.Count();
+        }
     }
 }
    
