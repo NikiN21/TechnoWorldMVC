@@ -1,11 +1,9 @@
 ﻿@model IEnumerable<TechnoWorld.Models.Order.OrderListingViewModel>
 
-@{
-    ViewData["Title"] = "Index";
-}
+@{ ViewData["Title"] = "Index"; }
 @*https://bootstrapious.com/p/bootstrap-shopping-cart*@
 
-<h1>All Orders</h1>
+<h1>Here are your orders</h1>
 <body>
     <div class="pb-5">
         <div class="container">
@@ -21,35 +19,47 @@
                                         <div class="p-2 px-3 text-uppercase">Product</div>
                                     </th>
                                     <th scope="col" class="border-0 bg-light">
-                                            <div class="py-2 text-uppercase">Price</div>
-                                        </th>
+                                        <div class="py-2 text-uppercase">Price</div>
+                                    </th>
                                     <th scope="col" class="border-0 bg-light">
                                         <div class="py-2 text-uppercase">Quantity</div>
                                     </th>
                                     <th scope="col" class="border-0 bg-light">
                                         <div class="py-2 text-uppercase">Client</div>
                                     </th>
+                                    <th scope="col" class="border-0 bg-light">
+                                        <div class="py-2 text-uppercase">Discount</div>
+                                    </th>
+                                    <th scope="col" class="border-0 bg-light">
+                                        <div class="py-2 text-uppercase">TotalPrice</div>
+                                    </th>
                                 </tr>
                             </thead>
                             @foreach (var item in Model)
                             {
-                                <tbody>
-                                    <tr>
-                                        <th scope="row" class="border-0">
-                                            <div class="p-2">
-                                                <img src="@Html.DisplayFor(modelItem => item.ImageUrl)" alt="Image" width="100" />
-                                                <div class="ml-3 d-inline-block align-middle">
-                                                    @Html.DisplayFor(modelItem => item.Brand)  @Html.DisplayFor(modelItem => item.Model)
-                                                </div>
-                                            </div>
-                                        </th>
-                                        <td class="border-0 align-middle"><strong> @Html.DisplayFor(modelItem => item.Price)</strong></td>
-                                        <td class="border-0 align-middle"><strong> @Html.DisplayFor(modelItem => item.ProductCount)</strong></td>
-                                        <td class="border-0 align-middle"><strong> Ordered on @Html.DisplayFor(modelItem => item.OrderedOn) from  @Html.DisplayFor(modelItem => item.CustomerUsername)</strong></td>
-                                    </tr>
+                <tbody>
+                    <tr>
+                        <th scope="row" class="border-0">
+                            <div class="p-2">
+                                <img src="@Html.DisplayFor(modelItem => item.ImageUrl)" alt="Image" width="100" />
+                                <div class="ml-3 d-inline-block align-middle">
+                                    @Html.DisplayFor(modelItem => item.Brand)  @Html.DisplayFor(modelItem => item.Model)
+                                </div>
+                            </div>
+                        </th>
+                        <td class="border-0 align-middle"><strong> @Html.DisplayFor(modelItem => item.TotalPrice)</strong></td>
+                        <td class="border-0 align-middle"><strong> @Html.DisplayFor(modelItem => item.ProductCount)</strong></td>
+                        <td class="border-0 align-middle"><strong> Ordered on @Html.DisplayFor(modelItem => item.OrderedOn) from  @Html.DisplayFor(modelItem => item.CustomerUsername)</strong></td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Discount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalPrice)
+                        </td>
+                    </tr>
 
-                                </tbody>
-                            }
+                </tbody>
+}
                         </table>
                     </div>
 
@@ -66,6 +76,15 @@
         min-height: 100vh;
     }
 </style>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+<script>function calcSum() {
+        let num1 = document.getElementsByName('ProductCount')[0].value;
+        let num2 = document.getElementsByName('Price')[0].value;
+        let sum = Number(num1)*Number(num2);
+        document.getElementsByName('TotalPrice')[0].value = sum;
+    }</script>
 
 
 

@@ -261,7 +261,11 @@ namespace TechnoWorld.Controllers
             {
                 products = products.Where(x => x.CategoryName.ToLower() == searchStringCategoryName.ToLower())
                     .ToList();
-
+            }
+            if (!String.IsNullOrEmpty(searchStringBrandName))
+            {
+                products = products.Where(x => x.BrandName.ToLower() == searchStringBrandName.ToLower())
+                 .ToList();
             }
             return this.View(products);
         }
@@ -370,6 +374,8 @@ namespace TechnoWorld.Controllers
             statistic.countOrders = _productService.countOrders();
             return View(statistic);
         }
+
+        
     }
 }
 

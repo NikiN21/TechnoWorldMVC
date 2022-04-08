@@ -1,11 +1,54 @@
 ﻿@model TechnoWorld.Models.StatisticVM
 
-@{
-    ViewData["Title"] = "Statistic";
-}
+@{ ViewData["Title"] = "Statistic"; }
+<h4 class="text-center">Statistic</h4>
+<div class="text-center">
+    <div class="col-xl-8">
 
-<h1>Statistic</h1>
+        <div class="card-group pb-0">
+            <div class="card-columns text-center">
 
-<h4>Count of all products: @Model.countProducts</h4>
-<h4>Count of all users: @Model.countUsers</h4>
-<h4>Count of all orders: @Model.countOrders</h4>
+            </div>
+
+        </div>
+        <table class="table table-striped " style="width:150%">
+            <thead>
+                <tr>
+                    <th>
+                        Cout of products
+                    </th>
+                    <th>
+                        Count of users
+                    </th>
+                    <th> Count of orders</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+
+
+                <tr>
+
+                   
+                    <td>
+                        @Model.countProducts
+                    </td>
+                    <td>
+                        @Model.countUsers
+                    </td>
+
+                    <td>
+                        @Model.countOrders
+                    </td>
+
+
+                </tr>
+
+            </tbody>
+            
+            
+        </table>
+    </div>
+</div>
+
+

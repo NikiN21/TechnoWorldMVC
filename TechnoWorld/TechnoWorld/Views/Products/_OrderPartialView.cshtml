@@ -6,7 +6,7 @@
             <input class="form-control" min="1" asp-for="ProductCount" />
             <span asp-validation-for="ProductCount" class="text-danger"></span>
         </div>
-        <button type="submit" class="btn btn-primary">Order</button>
+        <button type="submit" class="btn btn-outline-primary">Order</button>
     </div>
     <input type="hidden" asp-for="ProductId" value="@Model.ProductId">
 </form>

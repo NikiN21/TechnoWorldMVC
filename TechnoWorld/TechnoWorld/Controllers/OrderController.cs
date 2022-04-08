@@ -47,6 +47,8 @@ namespace TechnoWorld.Controllers
                     ImageUrl = $"/images/{ev.ImageId}.{ev.Image.Extension}",
                     Model=ev.Model,
                     Price=ev.Price,
+                    Discount=ev.Discount,
+
                    // TotalPrice = (ev.Quantity * ev.MaxPrice).ToString()
                 };
                 
@@ -77,6 +79,9 @@ namespace TechnoWorld.Controllers
                      ImageUrl = x.ImageUrl,
                      Model = x.Model,
                      Price = x.Price,
+                     Discount = x.Discount,
+                     TotalPrice =x.TotalPrice,
+
                     // TotalPrice = (x.Count * x.MaxPrice).ToString()
                  }).ToList();
 
@@ -106,7 +111,10 @@ namespace TechnoWorld.Controllers
                 ImageUrl = x.ImageUrl,
                 Model = x.Model,
                 Price = x.Price,
-               // TotalPrice = (x.Count * x.MaxPrice).ToString()
+            Discount=x.Discount,
+                
+                TotalPrice = x.TotalPrice,
+                // TotalPrice = (x.Count * x.MaxPrice).ToString()
             })
             .ToList();
 
