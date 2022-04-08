@@ -17,6 +17,7 @@ namespace TechnoWorld.Models.Order
         [Display(Name = "Quantity")]
         public int ProductCount { get; set; }
         public string BrandName { get; set; }
+        public decimal TotalPrice { get; set; }
 
 
 

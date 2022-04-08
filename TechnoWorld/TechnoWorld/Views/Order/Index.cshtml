@@ -44,11 +44,18 @@
                                             </div>
                                         </th>
                                         <td class="border-0 align-middle"><strong> @Html.DisplayFor(modelItem => item.Price)</strong></td>
+                                        @*<td class="border-0 align-middle"><strong> @Html.DisplayFor(modelItem => item.TotalPrice)</strong></td>*@
                                         <td class="border-0 align-middle"><strong> @Html.DisplayFor(modelItem => item.ProductCount)</strong></td>
                                         <td class="border-0 align-middle"><strong> Ordered on @Html.DisplayFor(modelItem => item.OrderedOn) from  @Html.DisplayFor(modelItem => item.CustomerUsername)</strong></td>
                                     </tr>
 
                                 </tbody>
+                                @*<div class="form-group">
+                                    <input type="button" value="TotalPrice" class="btn btn-primary" onclick="calcSum()" />
+                                    <input asp-for="TotalPrice" class="form-control" /> <br>
+
+
+                                </div>*@
                             }
                         </table>
                     </div>
@@ -66,6 +73,14 @@
         min-height: 100vh;
     }
 </style>
+<script>
+    function calcSum() {
+        let num1 = document.getElementsByName('Count')[0].value;
+        let num2 = document.getElementsByName('Price')[0].value;
+        let sum = Number(num1) * Number(num2);
+        document.getElementsByName('TotalPrice')[0].value = sum;
+    }
+</script>
 
 
 

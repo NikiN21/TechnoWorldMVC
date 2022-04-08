@@ -21,12 +21,19 @@ namespace TechnoWorld.Entities
         public string CustomerId { get; set; }
         public virtual ProductUser Customer { get; set; }
         public int Count { get; set; }
+        public decimal Price {get;set;}
+        public decimal TotalPrice
+        {
+            get
+            {
+                return Count * Product.Price;
+            }
+        }
         public string ImageId { get; set; }
         public virtual Image Image { get; set; }
         public string ImageUrl { get; set; }
         public string Model { get; set; }
-        public decimal Price { get; set; }
-        //public decimal MaxPrice { get; set; }
+        
 
     }
 }
