@@ -49,11 +49,12 @@ namespace TechnoWorld.Services
 
                 BrandId = model.BrandId,
                 CategoryId = model.CategoryId,
-              
+
                 Price = model.Price,
                 Description = model.Description,
                 Quantity = model.Quantity,
-                Discount = model.Discount,
+                Discount = 0,
+               // Discount = model.Discount,
             };
 
             var dbImage = new Image()
@@ -168,8 +169,11 @@ namespace TechnoWorld.Services
                 return false;
             }
 
-            product.Discount = product.Price * discount / 100;
-            product.Price -= product.Discount;
+            //product.Discount = product.Price * discount / 100;
+            // product.Price -= product.Discount;
+
+            product.Discount = discount;
+            product.Price = product.Price - product.Price*product.Discount / 100;
 
             _context.Products.Update(product);
 
@@ -185,7 +189,8 @@ namespace TechnoWorld.Services
                 return false;
             }
 
-            product.Price += product.Discount;
+            product.Price = product.Price + product.Price * product.Discount / 100;
+            // product.Price += product.Discount;
             product.Discount = 0;
 
             _context.Products.Update(product);

@@ -16,6 +16,9 @@
                             <thead>
                                 <tr>
                                     <th scope="col" class="border-0 bg-light">
+                                        <div class="py-2 text-uppercase">Client</div>
+                                    </th>
+                                    <th scope="col" class="border-0 bg-light">
                                         <div class="p-2 px-3 text-uppercase">Product</div>
                                     </th>
                                     <th scope="col" class="border-0 bg-light">
@@ -24,9 +27,7 @@
                                     <th scope="col" class="border-0 bg-light">
                                         <div class="py-2 text-uppercase">Quantity</div>
                                     </th>
-                                    <th scope="col" class="border-0 bg-light">
-                                        <div class="py-2 text-uppercase">Client</div>
-                                    </th>
+
                                     <th scope="col" class="border-0 bg-light">
                                         <div class="py-2 text-uppercase">Discount</div>
                                     </th>
@@ -39,23 +40,22 @@
                             {
                 <tbody>
                     <tr>
+                        <td class="border-0 align-middle"><strong> Ordered on @Html.DisplayFor(modelItem => item.OrderedOn) from  @Html.DisplayFor(modelItem => item.CustomerUsername)</strong></td>
                         <th scope="row" class="border-0">
                             <div class="p-2">
+
                                 <img src="@Html.DisplayFor(modelItem => item.ImageUrl)" alt="Image" width="100" />
                                 <div class="ml-3 d-inline-block align-middle">
                                     @Html.DisplayFor(modelItem => item.Brand)  @Html.DisplayFor(modelItem => item.Model)
                                 </div>
                             </div>
                         </th>
-                        <td class="border-0 align-middle"><strong> @Html.DisplayFor(modelItem => item.TotalPrice)</strong></td>
+                        <td class="border-0 align-middle"><strong> @Html.DisplayFor(modelItem => item.Price)</strong></td>
                         <td class="border-0 align-middle"><strong> @Html.DisplayFor(modelItem => item.ProductCount)</strong></td>
-                        <td class="border-0 align-middle"><strong> Ordered on @Html.DisplayFor(modelItem => item.OrderedOn) from  @Html.DisplayFor(modelItem => item.CustomerUsername)</strong></td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Discount)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.TotalPrice)
-                        </td>
+
+                        <td class="border-0 align-middle"><strong> @Html.DisplayFor(modelItem => item.Discount)%</strong></td>
+
+                        <td class="border-0 align-middle"><strong> @Html.DisplayFor(modelItem => item.TotalPrice)</strong></td>
                     </tr>
 
                 </tbody>
@@ -68,23 +68,25 @@
         </div>
     </div>
 </body>
-<style>
+    <style>
     body {
         background: #a3c4ee;
         background: -webkit-linear-gradient(to right, #1873CC, #A1C5EA);
         background: linear-gradient(to right, #1873CC, #A1C5EA);
         min-height: 100vh;
-    }
-</style>
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
-<script>function calcSum() {
+      }
+        </style>
+        @section Scripts {
+         @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        }
+        <script>function calcSum() {
         let num1 = document.getElementsByName('ProductCount')[0].value;
         let num2 = document.getElementsByName('Price')[0].value;
         let sum = Number(num1)*Number(num2);
         document.getElementsByName('TotalPrice')[0].value = sum;
-    }</script>
+        }
+    </script>
+
 
 
 

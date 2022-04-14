@@ -16,6 +16,9 @@
                             <thead>
                                 <tr>
                                     <th scope="col" class="border-0 bg-light">
+                                        <div class="py-2 text-uppercase">Client</div>
+                                    </th>
+                                    <th scope="col" class="border-0 bg-light">
                                         <div class="p-2 px-3 text-uppercase">Product</div>
                                     </th>
                                     <th scope="col" class="border-0 bg-light">
@@ -24,9 +27,7 @@
                                     <th scope="col" class="border-0 bg-light">
                                         <div class="py-2 text-uppercase">Quantity</div>
                                     </th>
-                                    <th scope="col" class="border-0 bg-light">
-                                        <div class="py-2 text-uppercase">Client</div>
-                                    </th>
+
                                     <th scope="col" class="border-0 bg-light">
                                         <div class="py-2 text-uppercase">Discount</div>
                                     </th>
@@ -39,23 +40,22 @@
                             {
                 <tbody>
                     <tr>
+                        <td class="border-0 align-middle"><strong> Ordered on @Html.DisplayFor(modelItem => item.OrderedOn) from  @Html.DisplayFor(modelItem => item.CustomerUsername)</strong></td>
                         <th scope="row" class="border-0">
                             <div class="p-2">
+
                                 <img src="@Html.DisplayFor(modelItem => item.ImageUrl)" alt="Image" width="100" />
                                 <div class="ml-3 d-inline-block align-middle">
                                     @Html.DisplayFor(modelItem => item.Brand)  @Html.DisplayFor(modelItem => item.Model)
                                 </div>
                             </div>
                         </th>
-                        <td class="border-0 align-middle"><strong> @Html.DisplayFor(modelItem => item.TotalPrice)</strong></td>
+                        <td class="border-0 align-middle"><strong> @Html.DisplayFor(modelItem => item.Price)</strong></td>
                         <td class="border-0 align-middle"><strong> @Html.DisplayFor(modelItem => item.ProductCount)</strong></td>
-                        <td class="border-0 align-middle"><strong> Ordered on @Html.DisplayFor(modelItem => item.OrderedOn) from  @Html.DisplayFor(modelItem => item.CustomerUsername)</strong></td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Discount)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.TotalPrice)
-                        </td>
+
+                        <td class="border-0 align-middle"><strong> @Html.DisplayFor(modelItem => item.Discount)%</strong></td>
+
+                        <td class="border-0 align-middle"><strong> @Html.DisplayFor(modelItem => item.TotalPrice)</strong></td>
                     </tr>
 
                 </tbody>}

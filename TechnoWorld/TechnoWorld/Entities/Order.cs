@@ -32,7 +32,9 @@ namespace TechnoWorld.Entities
         {
             get
             {
-                return Count * Price-Count*Price*Discount/100;
+
+               //  return Count * Price-Count*Price*Discount/100;
+                return Count * Price;
             }
         }
 
