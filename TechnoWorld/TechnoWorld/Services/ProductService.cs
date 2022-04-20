@@ -189,7 +189,7 @@ namespace TechnoWorld.Services
                 return false;
             }
 
-            product.Price = product.Price + product.Price * product.Discount / 100;
+            product.Price = product.Price * 100 / (100 - product.Discount);
             // product.Price += product.Discount;
             product.Discount = 0;
 

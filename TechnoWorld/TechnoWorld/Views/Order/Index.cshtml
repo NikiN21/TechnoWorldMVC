@@ -43,19 +43,17 @@
                         <td class="border-0 align-middle"><strong> Ordered on @Html.DisplayFor(modelItem => item.OrderedOn) from  @Html.DisplayFor(modelItem => item.CustomerUsername)</strong></td>
                         <th scope="row" class="border-0">
                             <div class="p-2">
-
                                 <img src="@Html.DisplayFor(modelItem => item.ImageUrl)" alt="Image" width="100" />
                                 <div class="ml-3 d-inline-block align-middle">
                                     @Html.DisplayFor(modelItem => item.Brand)  @Html.DisplayFor(modelItem => item.Model)
                                 </div>
                             </div>
                         </th>
-                        <td class="border-0 align-middle"><strong> @Html.DisplayFor(modelItem => item.Price)</strong></td>
+                        <td class="border-0 align-middle"><strong> @Html.DisplayFor(modelItem => item.Price)lv.</strong></td>
                         <td class="border-0 align-middle"><strong> @Html.DisplayFor(modelItem => item.ProductCount)</strong></td>
 
                         <td class="border-0 align-middle"><strong> @Html.DisplayFor(modelItem => item.Discount)%</strong></td>
-
-                        <td class="border-0 align-middle"><strong> @Html.DisplayFor(modelItem => item.TotalPrice)</strong></td>
+                        <td class="border-0 align-middle"><strong> @Html.DisplayFor(modelItem => item.TotalPrice)lv.</strong></td>
                     </tr>
 
                 </tbody>}

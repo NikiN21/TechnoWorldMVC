@@ -22,8 +22,9 @@ namespace TechnoWorld.Entities
         public string ImageId { get; set; }
         public virtual Image Image { get; set; }
         public decimal Price { get; set; }
-       
-      //  public decimal TotalPrice { get; set; }
+        public string ImageUrl { get; set; }
+
+        //  public decimal TotalPrice { get; set; }
 
         public int Quantity { get; set; }
         public decimal Discount { get; set; }

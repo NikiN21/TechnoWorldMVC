@@ -214,10 +214,11 @@ namespace TechnoWorld.Controllers
             {
                 Id = item.Id,
                 CategoryId = item.CategoryId,
+                CategoryName = item.Category.Name,
                 Model = item.Model,
                 BrandId = item.BrandId,
+                BrandName = item.Brand.Name,
                 Description = item.Description,
-
                 Price = item.Price,
                 Quantity = item.Quantity,
                 Discount = item.Discount
@@ -324,7 +325,7 @@ namespace TechnoWorld.Controllers
                 BrandId = x.BrandId,
                 OldPrice = x.Price,
                 NewPrice = x.Price,
-                ImageUrl = x.ImageId
+                ImageUrl = x.ImageUrl,
             };
             return View(product);
         }

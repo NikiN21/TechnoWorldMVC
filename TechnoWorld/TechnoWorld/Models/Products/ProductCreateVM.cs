@@ -23,10 +23,12 @@ namespace TechnoWorld.Models.Product
 
         [Display(Name ="Category")]  
         public int CategoryId { get; set; }
+        public string CategoryName { get; set; }
         public virtual List<CategoryChoiceVM> Categories { get; set; }
 
         [Display(Name = "Brand")]
         public int BrandId { get; set; }
+        public string BrandName { get; set; }
         public virtual List<BrandChoiceVM> Brands { get; set; }
 
         

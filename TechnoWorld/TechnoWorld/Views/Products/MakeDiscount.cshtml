@@ -1,59 +1,135 @@
 ﻿@model TechnoWorld.Models.Products.ProductPromotionViewModel
 
-@{ ViewData["Title"] = "Discount";
-    }
+@{ ViewData["Title"] = "Discount"; }
 
 <h1 class="text-center">Make Discount</h1>
 
-<div id="detailsDiv" class="text-center">
-       
-   
-    
+@*<div id="detailsDiv" class="text-center">
 
-        <div>
-            <h2 id="productTitle">
-                @Model.BrandId @Model.Model 
-            </h2>
-            <div class="b-inline-top details-item-price">
-                <h5>Old price</h5>
 
-                <span id="oldPrice">@Model.OldPrice</span>
-                <span> lv.</span>
-                <hr />
-            </div>
-            <div class="b-inline-top details-item-price">
-                <h5>New price</h5>
-                
-                <span id="newPrice">@Model.NewPrice</span>
-                <span> lv.</span>
-                <hr />
-            </div>
+
+
             <div>
-                <form asp-action="MakeDiscount" asp-controller="Products" method="post">
-                    <input type="hidden" name="id" value="@Model.Id" />
-                    <div>
-                        <label>Enter percentages: </label>
-                        <input class="form-control m-auto text-center" asp-for="Discount" id="productDiscount" min=0 style="width: 160px" onchange="CalculateDiscount()" placeholder="Enter percentages" value="" />
-                        <span asp-validation-for="Discount" class="text-danger"></span>
-                    </div>
-                    <div class="d-block mt-4">
-                        <button type="submit" class="btn btn-success">Make Discount</button>
-                    </div>
-                </form>
+                <h2 id="productTitle">
+                    @Model.BrandId @Model.Model
+                </h2>
+                <div class="b-inline-top details-item-price">
+                    <h5>Old price</h5>
+
+                    <span id="oldPrice">@Model.OldPrice</span>
+                    <span> lv.</span>
+                    <hr />
+                </div>
+                <div class="b-inline-top details-item-price">
+                    <h5>New price</h5>
+
+                    <span id="newPrice">@Model.NewPrice</span>
+                    <span> lv.</span>
+                    <hr />
+                </div>
+                <div>
+                    <form asp-action="MakeDiscount" asp-controller="Products" method="post">
+                        <input type="hidden" name="id" value="@Model.Id" />
+                        <div>
+                            <label>Enter percentages: </label>
+                            <input class="form-control m-auto text-center" asp-for="Discount" id="productDiscount" min=0 style="width: 160px" onchange="CalculateDiscount()" placeholder="Enter percentages" value="" />
+                            <span asp-validation-for="Discount" class="text-danger"></span>
+                        </div>
+                        <div class="d-block mt-4">
+                            <button type="submit" class="btn btn-outline-success">Make Discount</button>
+                        </div>
+                        <hr />
+                        <a asp-action="All">Back to List</a>
+                    </form>
+                </div>
             </div>
         </div>
+    </div>*@
+
+<div id="detailsDiv" class="card text-center">
+    <hr />
+    <hr />
+ 
+    @*<img src="@Model.ImageUrl" width="200" height="150" />*@
+
+    <div class="b-inline-top details-item-price">
+        <h5>Old price</h5>
+
+        <span id="oldPrice">@Model.OldPrice</span>
+        <span> lv.</span>
+        <hr />
+    </div>
+    <div class="b-inline-top details-item-price">
+        <h5>New price</h5>
+
+        <span id="newPrice">@Model.NewPrice</span>
+        <span> lv.</span>
+     
+    </div>
+    <div>
+        <form asp-action="MakeDiscount" asp-controller="Products" method="post">
+            <input type="hidden" name="id" value="@Model.Id" />
+            <div>
+                <label>Enter percentages: </label>
+                <input class="form-control m-auto text-center" asp-for="Discount" id="productDiscount" min=0 style="width: 160px" onchange="CalculateDiscount()" placeholder="Enter percentages" value="" />
+                <span asp-validation-for="Discount" class="text-danger"></span>
+            </div>
+            <div class="d-block mt-4">
+                <button type="submit" class="btn btn-outline-success">Make Discount</button>
+            </div>
+            <hr />
+            <a asp-action="All">Back to List</a>
+            <hr />
+            <hr />
+            <hr />
+
+        </form>
     </div>
 </div>
+ 
 
 
-<script>
-    function CalculateDiscount() {
-        let discount = parseFloat(document.getElementById('productDiscount').value)
-        let oldPrice = parseFloat(document.getElementById('oldPrice').textContent)
-        document.getElementById('newPrice').textContent = (oldPrice - oldPrice * discount / 100)
-    }</script>
+    <style>
+        .card {
+            /* Add shadows to create the "card" effect */
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+        }
+
+            /* On mouse-over, add a deeper shadow */
+            .card:hover {
+                box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+            }
+
+        /* Add some padding inside the card container */
+        .container {
+            padding: 2px 16px;
+        }
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+            border-radius: 5px; /* 5px rounded corners */
+        }
+
+        /* Add rounded corners to the top left and the top right corner of the image */
+        img {
+            border-radius: 5px 5px 0 0;
+        }
+    </style>
 
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+
+
+
+
+    <script>
+        function CalculateDiscount() {
+            let discount = parseFloat(document.getElementById('productDiscount').value)
+            let oldPrice = parseFloat(document.getElementById('oldPrice').textContent)
+            document.getElementById('newPrice').textContent = (oldPrice - oldPrice * discount / 100)
+        }</script>
+
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
