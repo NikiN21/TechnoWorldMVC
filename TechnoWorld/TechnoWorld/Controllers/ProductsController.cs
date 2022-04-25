@@ -373,6 +373,7 @@ namespace TechnoWorld.Controllers
             statistic.countProducts = _productService.countProducts();
             statistic.countUsers = _productService.countUsers();
             statistic.countOrders = _productService.countOrders();
+             statistic.Price = context.Orders.Sum(x => x.Price * x.Count);
             return View(statistic);
         }
 

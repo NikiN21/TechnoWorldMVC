@@ -10,5 +10,6 @@ namespace TechnoWorld.Models
         public int countProducts { get; set; }
         public int countUsers { get; set; }
         public int countOrders { get; set; }
+        public decimal Price { get; set; }
     }
 }

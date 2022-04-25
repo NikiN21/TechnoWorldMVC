@@ -212,6 +212,10 @@ namespace TechnoWorld.Services
         {
             return _context.Orders.Count();
         }
+        //public decimal Price()
+        //{
+        //    return _context.Orders.Sum();
+        //}
     }
 }
    

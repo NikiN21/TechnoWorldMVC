@@ -21,6 +21,7 @@ namespace TechnoWorld.Abstractions
         int countProducts();
         int countUsers();
         int countOrders();
+        //decimal Price();
 
     }
 }

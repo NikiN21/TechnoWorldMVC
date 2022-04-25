@@ -25,10 +25,10 @@
     <p>
         @if ((this.User.Identity.IsAuthenticated) && (this.User.IsInRole("Administrator")))
         {
-    <button asp-controller="Products" asp-action="Create" class="btn btn-outline-primary">
-        Create new product
+<button asp-controller="Products" asp-action="Create" class="btn btn-outline-primary">
+    Create new product
 
-    </button> } @*<input class="btn btn-outline-light" type="text" placeholder="Category" name="SearchStringCategoryName" />*@
+</button> } @*<input class="btn btn-outline-light" type="text" placeholder="Category" name="SearchStringCategoryName" />*@
 
         <input type="text" class="btn btn-outline-light" placeholder="Brand" name="SearchStringBrandName" />
 
@@ -113,35 +113,37 @@
                     <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
                 </svg>
             </a>
-        </ul>}
-                        <div class="mt-3 mt-lg-0 ml-lg-3 text-center">
+        </ul>
+                            <div class="mt-3 mt-lg-0 ml-lg-3 text-center">
 
 
 
-                            <a href="#myModal" class="trigger-btn" data-toggle="modal"></a>
-                            <td class="align-middle">
-                                @if (item.Discount == 0)
-                                {
-                <a asp-action="MakeDiscount" asp-route-id="@item.Id" class="btn btn-success" style="height:auto">
+                                <a href="#myModal" class="trigger-btn" data-toggle="modal"></a>
+                                <td class="align-middle">
+                                    @if (item.Discount == 0)
+                                    {
+                <a asp-action="MakeDiscount" asp-controller="Products" asp-route-id="@item.Id" class="btn btn-outline-success" style="height:auto">
                     Add <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-percent" viewBox="0 0 16 16">
                         <path d="M13.442 2.558a.625.625 0 0 1 0 .884l-10 10a.625.625 0 1 1-.884-.884l10-10a.625.625 0 0 1 .884 0zM4.5 6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 1a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zm7 6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 1a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
                     </svg>
                 </a> }
-                                else
-                                {
-                <form asp-action="RemoveDiscount" asp-controller="Products" method="post">
-                    <input type="hidden" name="id" value="@item.Id" />
-                    <button type="submit" class="btn btn-danger" style="height:auto">
-                        Remove <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-percent" viewBox="0 0 16 16">
-                            <path d="M13.442 2.558a.625.625 0 0 1 0 .884l-10 10a.625.625 0 1 1-.884-.884l10-10a.625.625 0 0 1 .884 0zM4.5 6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 1a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zm7 6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 1a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
-                        </svg>
-                    </button>
-                </form>}
-                            </td>
-                        </div>
+            else
+            {
+<form asp-action="RemoveDiscount" asp-controller="Products" method="post">
+    <input type="hidden" name="id" value="@item.Id" />
+    <button type="submit" class="btn btn-outline-danger" style="height:auto">
+        Remove <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-percent" viewBox="0 0 16 16">
+            <path d="M13.442 2.558a.625.625 0 0 1 0 .884l-10 10a.625.625 0 1 1-.884-.884l10-10a.625.625 0 0 1 .884 0zM4.5 6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 1a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zm7 6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 1a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
+        </svg>
+    </button>
+</form>}
+                                </td>
+                            </div>}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>}
+
+
